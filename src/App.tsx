@@ -1,19 +1,19 @@
 import './App.css'
-import Header from "./components/Header/Header.tsx";
-import Hero from "./components/Hero/Hero.tsx";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useAuthState} from "./store/authState.ts";
 import {api} from "./apis";
 import {useCategoryState} from "./store/categoriesState.ts";
-import TopCategories from "./components/TopCategories.tsx";
+import {RouterProvider} from "react-router-dom";
+import router from "./routes";
+
 
 function App() {
-        const {auth, setAuth} = useAuthState()
-        const {categories, setCategory} = useCategoryState()
+    const {auth, setAuth} = useAuthState()
+    const {categories, setCategory} = useCategoryState()
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        api.get("/categories").then(res=>{
+        api.get("/categories").then(res => {
             setCategory(res.data)
         })
 
@@ -22,17 +22,15 @@ function App() {
     }, [])
 
 
-    console.log(auth)
-
-  return (
-      <>
-          <Header />
-          <Hero />
-          <TopCategories />
+    return (
+        <>
 
 
-      </>
-  )
+            <RouterProvider router={router}/>
+
+
+        </>
+    )
 }
 
 export default App
