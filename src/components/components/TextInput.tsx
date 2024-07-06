@@ -1,4 +1,4 @@
-import React, {FC, FocusEventHandler, InputHTMLAttributes, useState} from 'react';
+import React, {FC, FocusEventHandler, InputHTMLAttributes, useEffect, useState} from 'react';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
@@ -6,10 +6,10 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput: FC<TextInputProps> = (props) => {
 
-    const {name, type, placeholder, className = "", label, ...attrs} = props
+    const {name, type, placeholder, className = "", label, value, ...attrs} = props
 
     const [state, setState] = useState({
-        isExpand: !!placeholder,
+        isExpand: !!placeholder || !!value,
         isActive: false
     })
 
@@ -22,6 +22,12 @@ const TextInput: FC<TextInputProps> = (props) => {
         setState({isExpand: true, isActive: true})
     }
 
+    useEffect(()=>{
+        if(value){
+            setState(prevState => ({...prevState, isActive: !!placeholder || !!value }))
+        }
+    }, [value])
+
 
     return (
 
@@ -30,6 +36,7 @@ const TextInput: FC<TextInputProps> = (props) => {
 
             <input {...attrs}
                    id={name}
+                   value={value}
                    placeholder={placeholder}
                    onFocus={handleFocus}
                    onBlur={handleBlur}

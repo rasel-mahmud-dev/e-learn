@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TextInput from "../../components/components/TextInput.tsx";
+import {useAuthState} from "../../store/authState.ts";
 
 const formInputs = {
     Basics: [
-        {name: "First Name", field: "name", helper: ""},
-        {name: "Last Name", field: "name", helper: ""},
+        {name: "First Name", field: "firstName", helper: ""},
+        {name: "Last Name", field: "lastName", helper: ""},
+        {name: "Full Name", field: "fullName", helper: ""},
         {
             name: "Headline",
             field: "headline",
@@ -42,6 +44,8 @@ const formInputs = {
 
 const Profile = () => {
 
+    const {auth} = useAuthState()
+
     const [state, setState] = useState({})
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -54,7 +58,17 @@ const Profile = () => {
         console.log(state)
     }
 
+    useEffect(()=>{
+        if(auth){
+            const updatedState = {}
+            if(auth.firstName) updatedState["firstName"] = auth.firstName
+            if(auth.lastName) updatedState["lastName"] = auth.lastName
+            if(auth.fullName) updatedState["fullName"] = auth.fullName
+            if(auth.email) updatedState["email"] = auth.email
 
+            setState(updatedState)
+        }
+    }, [auth])
 
 
     return (

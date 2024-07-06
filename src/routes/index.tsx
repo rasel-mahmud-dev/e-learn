@@ -10,6 +10,7 @@ import CourseSearch from "../screens/CourseSearch.tsx";
 import SignUp from "../screens/SignUp.tsx";
 import Login from "../screens/Login.tsx";
 import Profile from "../screens/Dashboard/Profile.tsx";
+import ProtectedRoute from "./ProtectedRoute.tsx";
 
 
 const router = createBrowserRouter([
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
 
     {
         path: "/dashboard",
-        element: <DashboardLayout/>,
+        element: <ProtectedRoute> <DashboardLayout/></ProtectedRoute>,
         children: [
             {path: "create-course", element: <CreateCourse/>},
             {path: "course-list", element: <ListOfCourse/>},
