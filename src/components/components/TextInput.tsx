@@ -6,16 +6,16 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput: FC<TextInputProps> = (props) => {
 
-    const {name, type, className = "", label, ...attrs} = props
+    const {name, type, placeholder, className = "", label, ...attrs} = props
 
     const [state, setState] = useState({
-        isExpand: false,
+        isExpand: !!placeholder,
         isActive: false
     })
 
     function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
         const val = e.target.value
-        setState({isExpand: !!val, isActive: false})
+        setState({isExpand: !!val || !!placeholder, isActive: false})
     }
 
     function handleFocus() {
@@ -30,9 +30,9 @@ const TextInput: FC<TextInputProps> = (props) => {
 
             <input {...attrs}
                    id={name}
+                   placeholder={placeholder}
                    onFocus={handleFocus}
                    onBlur={handleBlur}
-                   aria-describedby="form-group-note--6"
                    name={name} type={type}
                    className="el-text-input   "
             />

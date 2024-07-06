@@ -26,12 +26,13 @@ const DashboardLayout = () => {
         <div>
             <Header/>
 
-            <div>
+            <div className="flex ">
                 <Sidebar>
 
-                    <div>
-                        <img src="https://demo.edublink.co/wp-content/uploads/2023/06/logo-dark.png"/>
-                        <h1>{auth?.fullName}</h1>
+                    <div className="p-4 text-center mx-auto">
+                        <img className=" mx-auto "
+                             src="https://demo.edublink.co/wp-content/uploads/2023/06/logo-dark.png"/>
+                        <h1 className="text-xl font-semibold mt-4">{auth?.fullName}</h1>
                     </div>
 
                     <ul className="p-4">
@@ -46,9 +47,11 @@ const DashboardLayout = () => {
 
 
                     </ul>
-
                 </Sidebar>
-                <Outlet/>
+
+                <div className="p-4 w-full" style={{marginLeft: "350px"}}>
+                    <Outlet/>
+                </div>
             </div>
         </div>
     );

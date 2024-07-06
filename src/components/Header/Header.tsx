@@ -67,7 +67,8 @@ const Header = () => {
     }
 
     return (
-        <nav className="navbar bg-base-100">
+        <>
+        <nav className="navbar bg-base-100 navigation">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-x-10">
                 <div className="flex  items-center gap-x-4">
                     <div>
@@ -126,7 +127,8 @@ const Header = () => {
 
             </div>
         </nav>
-
+            <div className="header-space"></div>
+        </>
     );
 };
 
