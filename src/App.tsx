@@ -17,11 +17,15 @@ function App() {
             setCategory(res.data)
         })
 
+        api.get("/api/v1/auth/verify").then(res => {
+            setAuth(res?.data?.auth)
+        })
+
         api.get("/topics").then(res => {
             setTopics(res.data)
         })
 
-        setAuth(undefined)
+
 
     }, [])
 

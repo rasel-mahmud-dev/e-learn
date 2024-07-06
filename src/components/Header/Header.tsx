@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useCategoryState} from "../../store/categoriesState.ts";
 import {Link} from "react-router-dom";
 import {TfiAngleRight} from "react-icons/tfi";
+import {useAuthState} from "../../store/authState.ts";
 
 
 function CategoryDropdown({categories, topics, isOpen, setOpen}) {
@@ -56,8 +57,14 @@ function CategoryDropdown({categories, topics, isOpen, setOpen}) {
 const Header = () => {
 
     const {categories, topics} = useCategoryState()
+    const {auth, logout} = useAuthState()
 
     const [isOpen, setOpen] = useState("")
+
+
+    function handleLogout() {
+        logout()
+    }
 
     return (
         <nav className="navbar bg-base-100">
@@ -86,25 +93,32 @@ const Header = () => {
                 </div>
 
 
-                <div className="flex items-center   gap-x-2">
-                    <Link to="/join/login">
-                        <button className="btn btn-outline">Login</button>
-                    </Link>
-                    <Link to="/join/signup">
-                        <button className="btn btn-black">Sign up</button>
-                    </Link>
-
-                    <div className="dropdown">
-                        <button className="btn btn-outline">John Doe</button>
-                        <div className="dropdown-content">
-                            <div className="flex flex-col items-center justify-between">
-                                <Link to="/dashboard/create-course" className="dropdown-item">My Course</Link>
-                                <Link to="/create-course" className="dropdown-item">Profile</Link>
-                                <Link to="/CreateCourse" className="dropdown-item">Settings</Link>
-                                <Link to="/CreateCourse" className="dropdown-item">Logout</Link>
+                <div>
+                    {auth ? (
+                        <div>
+                            <div className="dropdown">
+                                <button className="btn btn-outline">John Doe</button>
+                                <div className="dropdown-content shadow-2xl border-gray-500">
+                                    <div className="flex flex-col items-center justify-between">
+                                        <Link to="/dashboard/create-course" className="dropdown-item">My Course</Link>
+                                        <Link to="/dashboard/profile" className="dropdown-item">Profile</Link>
+                                        <Link to="/CreateCourse" className="dropdown-item">Settings</Link>
+                                        <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-                    </div>
+                    ) : (
+                        <div className="flex items-center   gap-x-2">
+                            <Link to="/join/login">
+                                <button className="btn btn-outline">Login</button>
+                            </Link>
+                            <Link to="/join/signup">
+                                <button className="btn btn-black">Sign up</button>
+                            </Link>
+                        </div>
+                    )}
 
 
                 </div>

@@ -30,8 +30,11 @@ html {
   background: #24b790 !important;
   color: white !important;
   border-color: #24b790 !important;
+  height: auto !important;
 }
-
+.hover-bg-primary-1:hover{
+  background: rgba(36, 183, 144, 0.2) !important;
+}
 .el-compact-form-control-container{
   background: rgba(242, 242, 245, 0.54);
   position: relative;
@@ -72,3 +75,9 @@ html {
   }
 }
 
+
+
+.container{
+  max-width: 1400px;
+  margin: auto;
+}

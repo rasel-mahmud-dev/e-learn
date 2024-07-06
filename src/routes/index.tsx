@@ -9,6 +9,7 @@ import TopicSearch from "../screens/TopicSearch.tsx";
 import CourseSearch from "../screens/CourseSearch.tsx";
 import SignUp from "../screens/SignUp.tsx";
 import Login from "../screens/Login.tsx";
+import Profile from "../screens/Dashboard/Profile.tsx";
 
 
 const router = createBrowserRouter([
@@ -49,7 +50,11 @@ const router = createBrowserRouter([
         element: <DashboardLayout/>,
         children: [
             {path: "create-course", element: <CreateCourse/>},
-            {path: "course-list", element: <ListOfCourse/>}
+            {path: "course-list", element: <ListOfCourse/>},
+            {
+                path: "profile",
+                element: <Profile/>
+            },
         ]
     },
 ]);

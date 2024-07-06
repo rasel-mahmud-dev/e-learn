@@ -4,6 +4,8 @@ import {BsGoogle} from "react-icons/bs";
 import TextInput from "../components/components/TextInput.tsx";
 import {api} from "../apis";
 import {Link} from "react-router-dom";
+import LoginSvg from "../components/Svgs/LoginSVG.tsx";
+import SignupSvg from "../components/Svgs/SignupSVG.tsx";
 
 const initialState = {
     fullName: "",
@@ -35,17 +37,12 @@ const SignUp = () => {
     }
 
     return (
-        <div>
-            <div className="min-h-screen flex  pt-20 justify-center">
+        <div className="container">
+            <div className="max-w-screen-xl w-full absolute top-1/4 left-1/2 -translate-x-1/2 justify-center">
                 <div
                     className="bg-white grid justify-between grid-cols-2">
 
-                    <div className="hidden md:block w-full md:w-1/2">
-                        <img src="https://via.placeholder.com/400x400" alt="Sign Up Image" className="rounded-lg"/>
-                    </div>
-
-
-                    <div className="">
+                    <div className="max-w-3xl ml-auto">
                         <h1 className="text-6xl font-bold mb-4 text-center">Sign up and start learning</h1>
                         <form onSubmit={handleSubmit} className="flex flex-col gap-y-4 mt-20">
 
@@ -70,7 +67,7 @@ const SignUp = () => {
                                 onChange={handleChange}
                             />
 
-                            <button className="btn btn-primary2 w-full">Sign up</button>
+                            <button className="btn btn-primary2 py-8 w-full">Sign up</button>
                         </form>
 
                         <div className="mt-4 text-center">
@@ -89,10 +86,13 @@ const SignUp = () => {
                                 <a href="#"
                                    className="link link-primary">Terms
                                     of Use</a> and <a href="#" className="link link-primary">Privacy Policy</a>.</p>
-                            <p className="mt-2">Already have an account? <Link to="/join/login" className="link link-primary">Log
+                            <p className="mt-2">Already have an account? <Link to="/join/login"
+                                                                               className="link link-primary">Log
                                 in</Link></p>
                         </div>
                     </div>
+
+                    <SignupSvg/>
                 </div>
             </div>
         </div>

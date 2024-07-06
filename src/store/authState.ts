@@ -11,6 +11,7 @@ interface AuthState {
     auth?: AuthType
     authLoaded: boolean,
     setAuth: (auth?: AuthType) => void,
+    logout: () => void,
 
 }
 
@@ -21,6 +22,15 @@ export const useAuthState = create<AuthState>((set) => ({
         ...state,
         auth: auth,
         authLoaded: true
-    }))
+    })),
+
+    logout: () => set((state) => {
+        localStorage.removeItem("token")
+        return ({
+            ...state,
+            auth: undefined,
+            authLoaded: true
+        })
+    })
 
 }))
