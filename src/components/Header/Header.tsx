@@ -72,10 +72,10 @@ const Header = () => {
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-x-10">
                 <div className="flex  items-center gap-x-4">
                     <div>
-                        <a href="#" className="w-auto h-8">
+                        <Link to="/" className="w-auto h-8">
                             <img src="https://demo.edublink.co/wp-content/uploads/2023/06/logo-dark.png"
                                  alt="Your Platform Logo"/>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="relative">

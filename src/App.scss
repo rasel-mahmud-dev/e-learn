@@ -58,7 +58,7 @@ body {
   background: rgba(36, 183, 144, 0.2) !important;
 }
 .el-compact-form-control-container{
-  background: rgba(242, 242, 245, 0.54);
+  background:#f8f8fa;
   position: relative;
 
   transition: all .3s ease;
@@ -94,6 +94,30 @@ body {
       top: 0;
       font-weight: 400;
     }
+  }
+
+  &-textarea{
+    //background: red;
+    min-height: 100px;
+    height: 100% !important;
+
+    .el-form-label {
+      width: 100%;
+      background: inherit;
+      height: 30px;
+      padding-top: 10px;
+      top: 0;
+      transform: translateY(0%);
+    }
+
+    &-expand,
+    &-active {
+      //background: red;
+      .el-form-label {
+        top: 20px !important;
+      }
+    }
+
   }
 }
 

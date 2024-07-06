@@ -11,6 +11,7 @@ import SignUp from "../screens/SignUp.tsx";
 import Login from "../screens/Login.tsx";
 import Profile from "../screens/Dashboard/Profile.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
+import EditPhoto from "../screens/Dashboard/EditPhoto.tsx";
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,9 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile/>
+            }, {
+                path: "edit-photo",
+                element: <EditPhoto/>
             },
         ]
     },

@@ -9,7 +9,7 @@ const sidebarItems = [
 
     {title: "View public profile", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Profile", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
-    {title: "Photo", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Photo", link: "/dashboard/edit-photo", icon: () => <AiFillHeart/>},
     {title: "Account Security", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Subscriptions", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Payment methods", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
@@ -39,8 +39,9 @@ const DashboardLayout = () => {
 
                         {sidebarItems.map(item => (
 
-                            <Link key={item.link} to={item.link}>
-                                <li className="px-2 py-2 my-2 hover-bg-primary-1" key={item.link}>  {item.title}   </li>
+                            <Link key={item.link} to={item.link} className="flex items-center gap-x-2 hover-bg-primary-1 px-2 py-2 my-2">
+                                {item.icon?.()}
+                                <li className=" " key={item.link}>  {item.title}   </li>
                             </Link>
 
                         ))}
