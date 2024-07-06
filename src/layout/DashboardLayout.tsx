@@ -30,8 +30,14 @@ const DashboardLayout = () => {
                 <Sidebar>
 
                     <div className="p-4 text-center mx-auto">
-                        <img className=" mx-auto "
-                             src="https://demo.edublink.co/wp-content/uploads/2023/06/logo-dark.png"/>
+
+                        <div className="avatar">
+                            <div className="ring-emerald-600 ring-offset-base-100 w-32 rounded-full ring ring-offset-2">
+                                <img   src={auth?.avatar}/>
+                            </div>
+                        </div>
+
+
                         <h1 className="text-xl font-semibold mt-4">{auth?.fullName}</h1>
                     </div>
 
@@ -39,7 +45,8 @@ const DashboardLayout = () => {
 
                         {sidebarItems.map(item => (
 
-                            <Link key={item.link} to={item.link} className="flex items-center gap-x-2 hover-bg-primary-1 px-2 py-2 my-2">
+                            <Link key={item.link} to={item.link}
+                                  className="flex items-center gap-x-2 hover-bg-primary-1 px-2 py-2 my-2">
                                 {item.icon?.()}
                                 <li className=" " key={item.link}>  {item.title}   </li>
                             </Link>

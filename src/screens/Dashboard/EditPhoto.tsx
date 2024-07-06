@@ -6,6 +6,9 @@ import chooseFile from "../../utils/chooseFile.ts";
 import blobToBase64 from "../../utils/blobToBase64.ts";
 import getCroppedImg from "../../utils/getCroppedImg.ts";
 import {Crop} from "react-image-crop";
+import {Simulate} from "react-dom/test-utils";
+import resize = Simulate.resize;
+import resizeImage, {resizeProfilePhoto} from "../../utils/resizeImage.ts";
 
 
 type ProfileType = {
@@ -30,16 +33,30 @@ const EditPhoto = () => {
     const [state, setState] = useState({})
     const [profile, setProfile] = useState<ProfileType>()
 
+    const [resized, setResized] = useState({
+        base64: "",
+        blob: null,
+        fileName: ""
+    })
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setState(prev => ({...prev, [e.target.name]: e.target.value}))
     }
 
-    function handleSave(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        api.patch("/users/update-profile", state).then(res => {
-            console.log(res)
-        })
+    async function handleSave(e: React.FormEvent<HTMLFormElement>) {
+        try {
+            e.preventDefault()
+
+            const formData = new FormData()
+            formData.append("avatar", resized.blob, resized.fileName)
+
+            api.patch(`/users/update-profile-photo`, formData).then(res => {
+                console.log(res)
+            })
+
+        } catch (ex) {
+
+        }
     }
 
     function loadProfile(userId: string) {
@@ -69,58 +86,22 @@ const EditPhoto = () => {
         }
     }, [profile])
 
-    const [crop, setCrop] = useState<Crop>({
-        unit: '%', // Can be 'px' or '%'
-        x: 25,
-        y: 25,
-        width: 50,
-        height: 50
-    })
-
-    const [base64, setBase64] = useState("")
-
-    const [cropped, setCropped] = useState({
-        blob: null,
-        base64: null,
-        done: false
-    })
 
     async function handleChoosePhoto() {
         try {
-            setCropped(prevState => ({...prevState,
-                done: false
-            }))
             const file = await chooseFile({accept: []})
             if (file) {
                 const base64 = await blobToBase64(file)
-                setBase64(base64)
+                const file2 = await resizeProfilePhoto({
+                    src: base64,
+                    quality: 0.7,
+                    targetSize: 300
+                })
+                setResized({...file2, resized: file.name})
             }
         } catch (ex) {
-
+            console.log(ex)
         }
-    }
-
-    const image = useRef()
-
-    async function handleComplete() {
-        try {
-            const croppedImg = await getCroppedImg(image.current, crop, "returnedFileName.jpg");
-            const base64 = await blobToBase64(croppedImg)
-            setCropped({
-                base64,
-                blob: croppedImg,
-                done: false
-            })
-        } catch (ex) {
-
-        }
-    }
-
-    async function handleCropDone() {
-        setCropped(prevState => ({...prevState,
-            done: true
-        }))
-
     }
 
 
@@ -132,19 +113,23 @@ const EditPhoto = () => {
 
             <form onSubmit={handleSave}>
 
-                <h3>Image preview</h3>
+                <h3 className="text-lg mt-10 font-medium">Image preview</h3>
 
-                <div className="border min-h-40 flex">
-                    {!cropped?.done ? <CropImage ref={image} handleComplete={handleComplete} crop={crop} setCrop={setCrop} src={base64}/> : (
-                        <div>
-                            <img src={cropped.base64} alt=""/>
-                        </div>
-                    ) }
+                <div className="border min-h-40 flex w-full">
+                    <div className="w-full">
+
+                        { resized.base64 ? (
+                            <img className="mx-auto flex justify-center" src={resized.base64} alt=""/>
+                        ): (
+                            <img className="mx-auto flex justify-center" src={auth?.avatar} alt=""/>
+                        )}
+
+
+                    </div>
                 </div>
 
                 <div>
-                    {base64 && <button type="button" onClick={handleCropDone}
-                                       className="btn btn-primary2 mt-5 px-20">Crop</button>}
+
                     <button type="button" onClick={handleChoosePhoto} className="btn btn-primary2 mt-5 px-20">Choose
                         Photo
                     </button>

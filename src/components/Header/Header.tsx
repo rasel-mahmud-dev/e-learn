@@ -97,9 +97,19 @@ const Header = () => {
                 <div>
                     {auth ? (
                         <div>
-                            <div className="dropdown">
-                                <button className="btn btn-outline">John Doe</button>
-                                <div className="dropdown-content shadow-2xl border-gray-500">
+                            <div className="dropdown  l">
+                                <button className="btn btn-outline">
+
+                                    <div className="avatar">
+                                        <div className="w-8 rounded-full">
+                                            <img
+                                                src={auth?.avatar}/>
+                                        </div>
+                                    </div>
+                                </button>
+
+
+                                <div className="dropdown-content shadow-2xl border-gray-500  max-w-2xl w-full">
                                     <div className="flex flex-col items-center justify-between">
                                         <Link to="/dashboard/create-course" className="dropdown-item">My Course</Link>
                                         <Link to="/dashboard/profile" className="dropdown-item">Profile</Link>

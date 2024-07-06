@@ -3,6 +3,9 @@ import {create} from 'zustand'
 type AuthType = {
     id: string
     username: string
+    avatar: string
+    displayName: string
+    email: string
     firstName: string
     lastName: string
 }
