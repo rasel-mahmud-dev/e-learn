@@ -11,7 +11,6 @@ const CreateCourse = () => {
         })
     }, [])
 
-    console.log(courses)
 
     return (
         <div className="container mx-auto p-4">

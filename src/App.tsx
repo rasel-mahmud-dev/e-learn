@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import React, {useEffect} from "react";
 import {useAuthState} from "./store/authState.ts";
 import {api} from "./apis";
@@ -8,13 +8,17 @@ import router from "./routes";
 
 
 function App() {
-    const {auth, setAuth} = useAuthState()
-    const {categories, setCategory} = useCategoryState()
+    const { setAuth} = useAuthState()
+    const { setCategory, setTopics} = useCategoryState()
 
     useEffect(() => {
 
         api.get("/categories").then(res => {
             setCategory(res.data)
+        })
+
+        api.get("/topics").then(res => {
+            setTopics(res.data)
         })
 
         setAuth(undefined)

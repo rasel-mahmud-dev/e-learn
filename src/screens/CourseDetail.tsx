@@ -8,25 +8,25 @@ const CourseDetail = () => {
     const [course, setCourse] = useState([]);
 
     useEffect(() => {
-        if(!slug) return
+        if (!slug) return
         api.get(`/course/detail/${slug}`).then(res => {
             setCourse(res.data);
         })
     }, [slug])
 
-    console.log(course)
+
+    if (!course) return <h2>No, detail.</h2>
 
     return (
 
         <div className="bg-gray-100 min-h-screen py-6 flex flex-col justify-center sm:py-12">
-            <div className="relative py-3 sm:max-w-5xl sm:mx-auto">
+            <div className="relative py-3 sm:max-w-5xl sm:mx-auto w-full">
                 <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
                     <div className="flex flex-col md:flex-row">
                         <div className="flex-1">
                             <div className="p-4">
-                                <h1 className="text-3xl font-bold">Master JavaScript from Basics to Advanced</h1>
-                                <p className="text-gray-600 mt-2">A perfect JavaScript course for all those who want to
-                                    learn and master JavaScript programming skills right from scratch.</p>
+                                <h1 className="text-3xl font-bold">{course.title}</h1>
+                                <p className="text-gray-600 mt-2">{course.description}</p>
                                 <div className="flex items-center mt-3">
                                     <span className="text-yellow-500 mr-2">
                                         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path
@@ -41,28 +41,36 @@ const CourseDetail = () => {
                             </div>
                         </div>
                         <div className="flex-shrink-0 mt-4 md:mt-0 md:ml-6">
-                            <div className="bg-gray-50 p-4 border border-gray-200 rounded-lg shadow-sm">
-                                <div className="text-center">
-                                    <p className="text-3xl font-bold">$44.99</p>
-                                    <button
-                                        className="mt-3 px-4 py-2 bg-purple-600 text-white font-semibold rounded-md shadow-md hover:bg-purple-700">Add
-                                        to cart
-                                    </button>
-                                    <button
-                                        className="mt-2 px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-md shadow-md hover:bg-gray-300">Buy
-                                        now
-                                    </button>
-                                    <p className="mt-4 text-sm text-gray-500">30-Day Money-Back Guarantee</p>
+                            <div className="bg-gray-50 overflow-hidden border border-gray-200 rounded-lg shadow-sm">
+                                <div>
+                                    <img src={course.thumbnail} alt=""/>
                                 </div>
-                                <div className="mt-6 text-sm">
-                                    <p>This course includes:</p>
-                                    <ul className="list-disc list-inside mt-2">
-                                        <li>10 hours on-demand video</li>
-                                        <li>20 downloadable resources</li>
-                                        <li>Access on mobile and TV</li>
-                                        <li>Full lifetime access</li>
-                                        <li>Certificate of completion</li>
-                                    </ul>
+
+                                <div className="p-4">
+                                    <div className="text-center">
+                                        <p className="text-3xl font-bold">${course.price}</p>
+
+
+                                        <button
+                                            className="mt-3 px-4 py-2 bg-purple-600 text-white font-semibold rounded-md shadow-md hover:bg-purple-700">Add
+                                            to cart
+                                        </button>
+                                        <button
+                                            className="mt-2 px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-md shadow-md hover:bg-gray-300">Buy
+                                            now
+                                        </button>
+                                        <p className="mt-4 text-sm text-gray-500">30-Day Money-Back Guarantee</p>
+                                    </div>
+                                    <div className="mt-6 text-sm">
+                                        <p>This course includes:</p>
+                                        <ul className="list-disc list-inside mt-2">
+                                            <li>10 hours on-demand video</li>
+                                            <li>20 downloadable resources</li>
+                                            <li>Access on mobile and TV</li>
+                                            <li>Full lifetime access</li>
+                                            <li>Certificate of completion</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

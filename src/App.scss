@@ -1,0 +1,74 @@
+body {
+  width: 100%;
+  font-size: 1.6rem;
+
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+.btn {
+  outline: none;
+  border-radius: 0 !important;
+  font-size: 1.6rem !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.btn-black {
+  background: #1f2937 !important;
+  color: white !important;
+  border-color: #1f2937 !important;
+}
+
+.btn-primary2 {
+  background: #24b790 !important;
+  color: white !important;
+  border-color: #24b790 !important;
+}
+
+.el-compact-form-control-container{
+  background: rgba(242, 242, 245, 0.54);
+  position: relative;
+
+  transition: all .3s ease;
+
+  outline: 0 !important;
+  height: 6rem !important;
+
+
+  .el-text-input {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 2rem 1.6rem 0;
+  }
+
+  .el-form-label {
+    transition: all .15s ease-out;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    padding-left: 1.6rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  &-expand,
+  &-active {
+    //background: red;
+    .el-form-label {
+      transform: translateY(5px);
+      top: 0;
+      font-weight: 400;
+    }
+  }
+}
+
