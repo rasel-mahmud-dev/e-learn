@@ -14,7 +14,7 @@ function App() {
     useEffect(() => {
 
         api.get("/categories").then(res => {
-            setCategory(res.data)
+            setCategory(res?.data?.data || [])
         })
 
         api.get("/api/v1/auth/verify").then(res => {

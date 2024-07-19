@@ -9,7 +9,7 @@ body {
 
 }
 
-.navigation{
+.navigation {
   box-shadow: 0px 4px 12px -4px #4040403d;
   position: fixed;
   top: 0;
@@ -19,11 +19,11 @@ body {
   z-index: 1000;
 }
 
-.header-space{
+.header-space {
   height: 80px;
 }
 
-.sidebar{
+.sidebar {
   position: fixed;
   top: calc(64px - 0px);
   left: 0;
@@ -54,11 +54,20 @@ body {
   border-color: #24b790 !important;
   height: auto !important;
 }
-.hover-bg-primary-1:hover{
+
+.btn-danger2 {
+  background: #fc511d !important;
+  color: white !important;
+  border-color: #fc511d !important;
+  height: auto !important;
+}
+
+.hover-bg-primary-1:hover {
   background: rgba(36, 183, 144, 0.2) !important;
 }
-.el-compact-form-control-container{
-  background:#f8f8fa;
+
+.el-compact-form-control-container {
+  background: #f8f8fa;
   position: relative;
 
   transition: all .3s ease;
@@ -96,7 +105,7 @@ body {
     }
   }
 
-  &-textarea{
+  &-textarea {
     //background: red;
     min-height: 100px;
     height: 100% !important;
@@ -122,8 +131,76 @@ body {
 }
 
 
-
-.container{
+.container {
   max-width: 1400px;
   margin: auto;
+}
+
+
+.rsl-table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+
+
+  thead {
+    tr {
+      @apply p-4 ;
+      th {
+        padding: 14px 10px;
+        text-transform: capitalize;
+        font-weight: 600;
+        text-align: start;
+      }
+    }
+
+  }
+
+  tbody {
+    tr {
+      td {
+        padding: 10px 10px;
+        word-break: break-all;
+      }
+    }
+
+    height: calc(100vh - 350px);
+    overflow: auto;
+  }
+
+  thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+
+  tbody {
+    display: block;
+    overflow: auto;
+  }
+
+
+  tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-bottom: 2px solid rgba(51, 61, 79, 0.15);
+
+
+  }
+
+  thead {
+    width: calc(100% - 5px)
+  }
+
+
+}
+
+.rsl-table tr th:nth-child(1) {
+  @apply rounded-l-xl
+}
+
+.rsl-table tr th:last-child {
+  @apply rounded-r-xl;
 }

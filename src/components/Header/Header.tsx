@@ -97,7 +97,7 @@ const Header = () => {
                 <div>
                     {auth ? (
                         <div>
-                            <div className="dropdown  l">
+                            <div className="dropdown">
                                 <button className="btn btn-outline">
 
                                     <div className="avatar">
@@ -109,12 +109,13 @@ const Header = () => {
                                 </button>
 
 
-                                <div className="dropdown-content shadow-2xl border-gray-500  max-w-2xl w-full">
+                                <div className="dropdown-content shadow-2xl border-gray-500   w-36 right-0 z-40">
                                     <div className="flex flex-col items-center justify-between">
-                                        <Link to="/dashboard/create-course" className="dropdown-item">My Course</Link>
-                                        <Link to="/dashboard/profile" className="dropdown-item">Profile</Link>
-                                        <Link to="/CreateCourse" className="dropdown-item">Settings</Link>
-                                        <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                                        <Link to="/dashboard/create-course" className="py-1 dropdown-item">My Course</Link>
+                                        <Link to="/dashboard/profile" className="py-1 dropdown-item">Profile</Link>
+                                        <Link to="/CreateCourse" className="py-1 dropdown-item">Settings</Link>
+                                        <Link to="/admin-dashboard" className="py-1 dropdown-item">Admin Dashboard</Link>
+                                        <button onClick={handleLogout} className="py-1 dropdown-item">Logout</button>
                                     </div>
                                 </div>
                             </div>

@@ -121,7 +121,6 @@ const Profile = () => {
         }
     }, [profile])
 
-    console.log(profile)
 
 
     return (
