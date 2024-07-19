@@ -204,3 +204,9 @@ body {
 .rsl-table tr th:last-child {
   @apply rounded-r-xl;
 }
+
+
+.dashboard-content{
+  max-height: calc(100vh - 246px);
+  overflow-y: auto;
+}

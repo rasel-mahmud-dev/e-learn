@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {useAdminDashboardState} from "../../../store/categoriesState.ts";
 import CommonTable, {CommonTableColumn} from "../../../components/CommonTable.tsx";
 
-const Topics = () => {
+const Instructors = () => {
 
     const {topics, fetchTopics, removeTopic} = useAdminDashboardState()
 
@@ -79,4 +79,4 @@ const Topics = () => {
     );
 };
 
-export default Topics;
+export default Instructors;

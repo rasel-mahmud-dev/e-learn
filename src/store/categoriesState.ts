@@ -1,5 +1,6 @@
 import {create} from 'zustand'
 import adminDashboardService from "./services/adminDashboardService.ts";
+import instructorZoneService from "./services/instructorZoneService.ts";
 
 type CategoryType = {
     slug: string,
@@ -44,6 +45,7 @@ interface AdminDashboardCategoryStateType {
     setTopics: (cat: any) => void,
 
 }
+
 
 export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((set) => ({
     categories: [],
@@ -96,5 +98,27 @@ export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((s
         ...state,
         topics: cat,
     }))
+
+}))
+
+
+interface InstructorZoneStateType {
+    courses: any[],
+
+    fetchCourses: () => void,
+
+
+}
+
+export const useInstructorZoneState = create<InstructorZoneStateType>((set) => ({
+    courses: [],
+
+    fetchCourses: async function () {
+        const courses = await instructorZoneService.fetchCourses()
+        return set(state => {
+            return {...state, courses}
+        })
+    },
+
 
 }))

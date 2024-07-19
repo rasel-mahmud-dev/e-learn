@@ -6,18 +6,17 @@ import {useAuthState} from "../store/authState.ts";
 import {AiFillHeart} from "react-icons/ai";
 
 const sidebarItems = [
-
+    {title: "My Courses", link: "/admin-dashboard/categories", icon: () => <AiFillHeart/>},
     {title: "Categories", link: "/admin-dashboard/categories", icon: () => <AiFillHeart/>},
     {title: "Sub Categories", link: "/admin-dashboard/sub-categories", icon: () => <AiFillHeart/>},
     {title: "Topics", link: "/admin-dashboard/topics", icon: () => <AiFillHeart/>},
-    {title: "Account Security", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Instructors", link: "/admin-dashboard/instructors", icon: () => <AiFillHeart/>},
     {title: "Subscriptions", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Payment methods", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Privacy", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Notifications", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "API clients", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Close account", link: "/admin-dashboard/profile", icon: () => <AiFillHeart/>},
-
 ]
 
 const DashboardLayout = () => {

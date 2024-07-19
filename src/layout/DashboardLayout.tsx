@@ -18,6 +18,19 @@ const sidebarItems = [
     {title: "API clients", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Close account", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
 
+    {title: "My Courses", link: "/dashboard/instructors/my-courses", icon: () => <AiFillHeart/>},
+    {title: "Create Course", link: "/dashboard/instructors/create-course", icon: () => <AiFillHeart/>},
+    {title: "Categories", link: "/dashboard/categories", icon: () => <AiFillHeart/>},
+    {title: "Sub Categories", link: "/dashboard/sub-categories", icon: () => <AiFillHeart/>},
+    {title: "Topics", link: "/dashboard/topics", icon: () => <AiFillHeart/>},
+    {title: "Instructors", link: "/dashboard/instructors", icon: () => <AiFillHeart/>},
+    {title: "Subscriptions", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Payment methods", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Privacy", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Notifications", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "API clients", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+    {title: "Close account", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
+
 ]
 
 const DashboardLayout = () => {
@@ -41,7 +54,7 @@ const DashboardLayout = () => {
                         <h1 className="text-xl font-semibold mt-4">{auth?.fullName}</h1>
                     </div>
 
-                    <ul className="p-4">
+                    <ul className="p-4 dashboard-content">
 
                         {sidebarItems.map(item => (
 
