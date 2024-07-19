@@ -10,6 +10,24 @@ class AdminDashboardService {
         }
     }
 
+    async fetchSubCategories() {
+        try {
+            const res = await api.get("/sub-categories")
+            return res?.data?.data || []
+        } catch (ex) {
+            return []
+        }
+    }
+
+    async removeSubCategory(id: string) {
+        try {
+            const {status} = await api.delete(`/sub-categories/${id}`)
+            return status === 200
+        } catch (ex) {
+            return ex
+        }
+    }
+
     async removeCategory(id: string) {
         try {
             const {status} = await api.delete(`/categories/${id}`)

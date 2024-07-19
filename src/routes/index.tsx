@@ -16,6 +16,7 @@ import AdminDashboardLayout from "../layout/AdminDashboardLayout.tsx";
 import Categories from "../screens/AdminDashboard/Categories.tsx";
 import CreateCategory from "../screens/AdminDashboard/CreateCategory.tsx";
 import SubCategories from "../screens/AdminDashboard/SubCategories.tsx";
+import CreateSubCategory from "../screens/AdminDashboard/CreateSubCategory.tsx";
 
 
 const router = createBrowserRouter([
@@ -73,13 +74,11 @@ const router = createBrowserRouter([
 
             {path: "categories", element: <Categories/>},
             {path: "categories/add", element: <CreateCategory/>},
-            {path: "categories/update:/updateSlug", element: <CreateCategory/>},
-
+            {path: "categories/edit/:updateSlug", element: <CreateCategory/>},
 
             {path: "sub-categories", element: <SubCategories/>},
-            {path: "sub-categories/add", element: <CreateCategory/>},
-            {path: "sub-categories/update:/updateSlug", element: <CreateCategory/>},
-
+            {path: "sub-categories/add", element: <CreateSubCategory/>},
+            {path: "sub-categories/edit/:updateSlug", element: <CreateSubCategory/>},
 
             {
                 path: "profile",

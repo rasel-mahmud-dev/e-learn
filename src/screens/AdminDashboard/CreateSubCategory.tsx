@@ -16,14 +16,17 @@ const formInputs = [
 ]
 
 
-const CreateCategory = () => {
+type CategoryState = {
+    title: string,
+    description: string,
+    image: string,
+}
 
-    const {auth} = useAuthState()
+const CreateSubCategory = () => {
 
     const {updateSlug} = useParams()
 
-    const [state, setState] = useState({})
-
+    const [state, setState] = useState<CategoryState>({})
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         setState(prev => ({...prev, [e.target.name]: e.target.value}))
@@ -31,48 +34,30 @@ const CreateCategory = () => {
 
     function handleSave(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        api.post("/categories", [state]).then(res => {
+        api.post("/sub-categories", [state]).then(res => {
             console.log(res)
         })
     }
 
-    function loadProfile(userId: string) {
-        // api.get(`/users/profile/${userId}`, state).then(res => {
-        //     setProfile(res.data.data)
-        // })
-    }
 
-    // useEffect(() => {
-    //     if (auth) {
-    //         const updatedState = {} as ProfileType
-    //         if (auth.firstName) updatedState["firstName"] = auth.firstName
-    //         if (auth.lastName) updatedState["lastName"] = auth.lastName
-    //         if (auth.fullName) updatedState["fullName"] = auth.fullName
-    //         if (auth.email) updatedState["email"] = auth.email
-    //         loadProfile(auth.id)
-    //         setState(updatedState)
-    //     }
-    // }, [auth])
-    //
-    // useEffect(() => {
-    //     if (profile) {
-    //         const updatedState = {} as ProfileType
-    //         if (profile.firstName) updatedState["firstName"] = profile.firstName
-    //         if (profile.lastName) updatedState["lastName"] = profile.lastName
-    //         if (profile.headline) updatedState["headline"] = profile.headline
-    //         if (profile.aboutMe) updatedState["aboutMe"] = profile.aboutMe
-    //         if (profile.youtube) updatedState["youtube"] = profile.youtube
-    //         if (profile.facebook) updatedState["facebook"] = profile.facebook
-    //         if (profile.github) updatedState["github"] = profile.github
-    //         if (profile.language) updatedState["language"] = profile.aboutMe
-    //         setState(prevState => ({...prevState, ...updatedState}))
-    //     }
-    // }, [profile])
+    useEffect(() => {
+        if (updateSlug) {
+            api.get(`/sub-categories/one?slug=${updateSlug}`).then(res => {
+                const data = res.data.data
+                if (!data) return
+                const updatedState: CategoryState = {} as CategoryState
+                if (data.title) updatedState["title"] = data.title
+                if (data.description) updatedState["description"] = data.description
+                if (data.image) updatedState["image"] = data.image
+                setState(prevState => ({...prevState, ...updatedState}))
+            })
+        }
+    }, [updateSlug])
 
 
     return (
         <div className="max-w-3xl w-full mx-auto">
-            <h1 className="text-4xl font-semibold">{updateSlug ? "Update " : "Create "} Category</h1>
+            <h1 className="text-4xl font-semibold">{updateSlug ? "Update " : "Create "} Sub Category</h1>
             <h4 className="text-lg font-medium mt-2"> Add information about category</h4>
 
             <form onSubmit={handleSave}>
@@ -101,4 +86,4 @@ const CreateCategory = () => {
     );
 };
 
-export default CreateCategory;
+export default CreateSubCategory;

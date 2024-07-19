@@ -33,28 +33,46 @@ export const useCategoryState = create<CategoryStateType>((set) => ({
 
 interface AdminDashboardCategoryStateType {
     categories: CategoryType[],
+    subCategories: CategoryType[],
     topics: any,
     fetchCategories: () => void,
+    fetchSubCategories: () => void,
     removeCategory: (id: string) => void,
+    removeSubCategory: (id: string) => void,
     setTopics: (cat: any) => void,
 
 }
 
 export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((set) => ({
     categories: [],
+    subCategories: [],
     isFetchingCategories: false,
     errorCategories: "",
     topics: [],
+
     fetchCategories: async function () {
         const categories = await adminDashboardService.fetchCategories()
         return set(state => {
             return {...state, categories}
         })
     },
+
+    fetchSubCategories: async function () {
+        const subCategories = await adminDashboardService.fetchSubCategories()
+        return set(state => {
+            return {...state, subCategories}
+        })
+    },
     removeCategory: async function (id: string) {
         await adminDashboardService.removeCategory(id)
         return set(state => {
             return {...state, categories: state.categories.filter(category => category.id !== id)}
+        })
+    },
+    removeSubCategory: async function (id: string) {
+        await adminDashboardService.removeSubCategory(id)
+        return set(state => {
+            return {...state, subCategories: state.subCategories.filter(category => category.id !== id)}
         })
     },
     setTopics: (cat) => set((state) => ({
