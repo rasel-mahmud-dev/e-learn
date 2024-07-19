@@ -19,6 +19,15 @@ class AdminDashboardService {
         }
     }
 
+    async fetchTopics() {
+        try {
+            const res = await api.get("/topics")
+            return res?.data?.data || []
+        } catch (ex) {
+            return []
+        }
+    }
+
     async removeSubCategory(id: string) {
         try {
             const {status} = await api.delete(`/sub-categories/${id}`)
@@ -31,6 +40,14 @@ class AdminDashboardService {
     async removeCategory(id: string) {
         try {
             const {status} = await api.delete(`/categories/${id}`)
+            return status === 200
+        } catch (ex) {
+            return ex
+        }
+    }
+    async removeTopic(id: string) {
+        try {
+            const {status} = await api.delete(`/topics/${id}`)
             return status === 200
         } catch (ex) {
             return ex

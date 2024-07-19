@@ -36,9 +36,11 @@ interface AdminDashboardCategoryStateType {
     subCategories: CategoryType[],
     topics: any,
     fetchCategories: () => void,
+    fetchTopics: () => void,
     fetchSubCategories: () => void,
     removeCategory: (id: string) => void,
     removeSubCategory: (id: string) => void,
+    removeTopic: (id: string) => void,
     setTopics: (cat: any) => void,
 
 }
@@ -54,6 +56,21 @@ export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((s
         const categories = await adminDashboardService.fetchCategories()
         return set(state => {
             return {...state, categories}
+        })
+    },
+
+
+    fetchTopics: async function () {
+        const topics = await adminDashboardService.fetchTopics()
+        return set(state => {
+            return {...state, topics}
+        })
+    },
+
+    removeTopic: async function (id: string) {
+        await adminDashboardService.removeCategory(id)
+        return set(state => {
+            return {...state, topics: state.topics.filter(top => top.id !== id)}
         })
     },
 
