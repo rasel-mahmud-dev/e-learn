@@ -21,6 +21,9 @@ import CreateTopic from "../screens/AdminDashboard/Topics/CreateTopic.tsx";
 import CreateCourse from "../screens/InstructorsZone/CreateCourse.tsx";
 import InstructorCourses from "../screens/InstructorsZone/InstructorCourses.tsx";
 import Instructors from "../screens/InstructorsZone/Instructors.tsx";
+import Roles from "../screens/AdminDashboard/Roles/Roles.tsx";
+import CreateRole from "../screens/AdminDashboard/Roles/CreateRole.tsx";
+import UsersRolesManager from "../screens/AdminDashboard/Roles/UsersRolesManager.tsx";
 
 
 const router = createBrowserRouter([
@@ -86,6 +89,13 @@ const router = createBrowserRouter([
                 path: "edit-photo",
                 element: <EditPhoto/>
             },
+
+
+
+            {path: "roles", element: <Roles/>},
+            {path: "users-roles", element: <UsersRolesManager/>},
+            {path: "roles/add", element: <CreateRole/>},
+            {path: "roles/edit/:updateSlug", element: <CreateRole/>},
 
 
             {path: "categories", element: <Categories/>},

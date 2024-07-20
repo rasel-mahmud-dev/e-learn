@@ -25,8 +25,8 @@ const SignUp = () => {
     async function handleSubmit(e) {
         try {
             e.preventDefault();
-            await api.post("/users", {
-                "fullName": state.fullName,
+            await api.post("/api/v1/auth/signup", {
+                "username": state.fullName,
                 "email": state.email,
                 "password": state.password,
             });

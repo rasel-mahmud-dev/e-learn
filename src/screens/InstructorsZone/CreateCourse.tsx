@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import TextInput from "../../components/components/TextInput.tsx";
 import {api} from "../../apis";
 import {useAdminDashboardState} from "../../store/categoriesState.ts";
+import ToastService from "../../services/ToastService.tsx";
+import axiosError from "../../utils/axiosError.ts";
 
 
 const formInputs = {
@@ -97,6 +99,8 @@ const CreateCourse = () => {
             console.log("added.")
             setCourse({})
         } catch (ex) {
+            const msg = axiosError(ex);
+            ToastService.openError(msg)
             console.log(ex)
         }
     };

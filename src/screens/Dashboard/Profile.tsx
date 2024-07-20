@@ -121,16 +121,13 @@ const Profile = () => {
         }
     }, [profile])
 
-    console.log(profile)
-
 
     return (
-        <div className="max-w-3xl w-full mx-auto">
+        <div className="container w-full mx-auto">
             <h1 className="text-4xl font-semibold">Public Profile</h1>
             <h4 className="text-lg font-medium mt-2"> Add information about yourself</h4>
 
             <form onSubmit={handleSave}>
-
                 {Object.keys(formInputs).map(key => {
                     const value = formInputs[key];
                     return (

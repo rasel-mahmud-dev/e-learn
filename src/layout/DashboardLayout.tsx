@@ -18,9 +18,15 @@ const sidebarItems = [
     {title: "API clients", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Close account", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
 
+    {title: "Roles", link: "/dashboard/roles", icon: () => <AiFillHeart/>},
+    {title: "Users Roles", link: "/dashboard/users-roles", icon: () => <AiFillHeart/>},
+
+
     {title: "My Courses", link: "/dashboard/instructors/my-courses", icon: () => <AiFillHeart/>},
+
     {title: "Create Course", link: "/dashboard/instructors/create-course", icon: () => <AiFillHeart/>},
     {title: "Categories", link: "/dashboard/categories", icon: () => <AiFillHeart/>},
+
     {title: "Sub Categories", link: "/dashboard/sub-categories", icon: () => <AiFillHeart/>},
     {title: "Topics", link: "/dashboard/topics", icon: () => <AiFillHeart/>},
     {title: "Instructors", link: "/dashboard/instructors", icon: () => <AiFillHeart/>},

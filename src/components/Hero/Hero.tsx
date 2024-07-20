@@ -12,7 +12,7 @@ const Hero = () => {
                     <p className="mt-6 text-lg text-gray-600">
                         Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.
                     </p>
-                    <button className="btn btn-primary mt-6">Find courses ➜</button>
+                    <button className="btn btn-primary2 mt-6">Find courses ➜</button>
                 </div>
                 <div className="md:w-1/2 flex justify-center md:justify-end">
                     <div className="relative">

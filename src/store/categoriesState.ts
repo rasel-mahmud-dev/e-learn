@@ -35,11 +35,16 @@ export const useCategoryState = create<CategoryStateType>((set) => ({
 interface AdminDashboardCategoryStateType {
     categories: CategoryType[],
     subCategories: CategoryType[],
+    roles: any,
     topics: any,
+    usersRoles: any,
+    fetchRoles: () => void,
     fetchCategories: () => void,
+    fetchUsersRoles: () => void,
     fetchTopics: () => void,
     fetchSubCategories: () => void,
     removeCategory: (id: string) => void,
+    removeRole: (id: string) => void,
     removeSubCategory: (id: string) => void,
     removeTopic: (id: string) => void,
     setTopics: (cat: any) => void,
@@ -49,6 +54,8 @@ interface AdminDashboardCategoryStateType {
 
 export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((set) => ({
     categories: [],
+    usersRoles: [],
+    roles: [],
     subCategories: [],
     isFetchingCategories: false,
     errorCategories: "",
@@ -58,6 +65,22 @@ export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((s
         const categories = await adminDashboardService.fetchCategories()
         return set(state => {
             return {...state, categories}
+        })
+    },
+
+
+    fetchUsersRoles: async function () {
+        const usersRoles = await adminDashboardService.fetchUsersRoles()
+        return set(state => {
+            return {...state, usersRoles}
+        })
+    },
+
+
+    fetchRoles: async function () {
+        const roles = await adminDashboardService.fetchRoles()
+        return set(state => {
+            return {...state, roles}
         })
     },
 
@@ -86,6 +109,12 @@ export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((s
         await adminDashboardService.removeCategory(id)
         return set(state => {
             return {...state, categories: state.categories.filter(category => category.id !== id)}
+        })
+    },
+    removeRole: async function (id: string) {
+        await adminDashboardService.removeRole(id)
+        return set(state => {
+            return {...state, roles: state.roles.filter(role => role.id !== id)}
         })
     },
     removeSubCategory: async function (id: string) {
