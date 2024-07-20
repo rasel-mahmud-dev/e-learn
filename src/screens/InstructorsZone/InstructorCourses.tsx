@@ -10,7 +10,7 @@ const InstructorCourses = () => {
 
     useEffect(() => {
         fetchCourses()
-    }, [])
+    }, [fetchCourses])
 
     function handleDelete(id: string) {
         // removeTopic(id)
@@ -42,6 +42,8 @@ const InstructorCourses = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
                         {courses?.map(course => (
+                            <Link to={`/dashboard/instructors/detail/${course.slug}`} key={course.id}>
+
                             <div className="card card-bordered">
                                 <img src={course.thumbnail} alt="thumb"/>
                                 <div className="p-3">
@@ -49,6 +51,7 @@ const InstructorCourses = () => {
                                     <h1>${course.price}</h1>
                                 </div>
                             </div>
+                            </Link>
                         ))}
 
                     </div>

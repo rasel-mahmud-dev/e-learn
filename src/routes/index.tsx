@@ -3,6 +3,7 @@ import HomePage from "../screens/HomePage.tsx";
 import DashboardLayout from "../layout/DashboardLayout.tsx";
 import ListOfCourse from "../screens/Dashboard/ListOfCourse.tsx";
 import CourseDetail from "../screens/CourseDetail.tsx";
+import CourseDetailInstructor from "../screens/InstructorsZone/CourseDetail.tsx";
 import MainLayout from "../layout/MainLayout.tsx";
 import TopicSearch from "../screens/TopicSearch.tsx";
 import CourseSearch from "../screens/CourseSearch.tsx";
@@ -24,6 +25,7 @@ import Instructors from "../screens/InstructorsZone/Instructors.tsx";
 import Roles from "../screens/AdminDashboard/Roles/Roles.tsx";
 import CreateRole from "../screens/AdminDashboard/Roles/CreateRole.tsx";
 import UsersRolesManager from "../screens/AdminDashboard/Roles/UsersRolesManager.tsx";
+import InstructorList from "../screens/AdminDashboard/InstructorList.tsx";
 
 
 const router = createBrowserRouter([
@@ -97,6 +99,8 @@ const router = createBrowserRouter([
             {path: "roles/add", element: <CreateRole/>},
             {path: "roles/edit/:updateSlug", element: <CreateRole/>},
 
+            {
+                path: "instructor-list", element: <InstructorList/>},
 
             {path: "categories", element: <Categories/>},
             {path: "categories/add", element: <CreateCategory/>},
@@ -112,7 +116,9 @@ const router = createBrowserRouter([
 
             {
                 path: "instructors", element: <Instructors/>, children: [
+                    {path: "detail/:slug", element: <CourseDetailInstructor/>},
                     {path: "create-course", element: <CreateCourse/>},
+                    {path: "update-course/:slug", element: <CreateCourse/>},
                     {path: "my-courses", element: <InstructorCourses/>},
                 ]
             },

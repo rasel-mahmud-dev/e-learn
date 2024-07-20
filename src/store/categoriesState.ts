@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import adminDashboardService from "./services/adminDashboardService.ts";
 import instructorZoneService from "./services/instructorZoneService.ts";
+import {a} from "vite/dist/node/types.d-aGj9QkWt";
 
 type CategoryType = {
     slug: string,
@@ -35,6 +36,7 @@ export const useCategoryState = create<CategoryStateType>((set) => ({
 interface AdminDashboardCategoryStateType {
     categories: CategoryType[],
     subCategories: CategoryType[],
+    instructors: any
     roles: any,
     topics: any,
     usersRoles: any,
@@ -42,6 +44,7 @@ interface AdminDashboardCategoryStateType {
     fetchCategories: () => void,
     fetchUsersRoles: () => void,
     fetchTopics: () => void,
+    fetchInstructors: () => void,
     fetchSubCategories: () => void,
     removeCategory: (id: string) => void,
     removeRole: (id: string) => void,
@@ -54,6 +57,7 @@ interface AdminDashboardCategoryStateType {
 
 export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((set) => ({
     categories: [],
+    instructors: [],
     usersRoles: [],
     roles: [],
     subCategories: [],
@@ -65,6 +69,13 @@ export const useAdminDashboardState = create<AdminDashboardCategoryStateType>((s
         const categories = await adminDashboardService.fetchCategories()
         return set(state => {
             return {...state, categories}
+        })
+    },
+
+    fetchInstructors: async function () {
+        const instructors = await adminDashboardService.fetchInstructors()
+        return set(state => {
+            return {...state, instructors}
         })
     },
 

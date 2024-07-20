@@ -3,7 +3,7 @@ import {api} from "../../apis";
 class InstructorZoneService {
     async fetchCourses() {
         try {
-            const res = await api.get("/api/v1/courses");
+            const res = await api.get("/api/v1/instructor/courses");
             return res?.data?.data || []
         } catch (ex) {
             return []

@@ -28,6 +28,15 @@ class AdminDashboardService {
         }
     }
 
+    async fetchInstructors() {
+        try {
+            const res = await api.get("/api/v1/instructor/all")
+            return res?.data?.data || []
+        } catch (ex) {
+            return []
+        }
+    }
+
     async fetchTopics() {
         try {
             const res = await api.get("/topics")

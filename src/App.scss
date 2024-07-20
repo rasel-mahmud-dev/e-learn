@@ -37,6 +37,20 @@ body {
   //font-size: 1.6rem !important;
 }
 
+.btn-floating {
+  width: 40px !important;
+  height: 40px !important;
+  bottom: 100px;
+  right: 5%;
+  aspect-ratio: 1 / 1 !important;
+  background-color: #2bb883 !important;
+  border: none !important;
+  position: fixed;
+  z-index: 100;
+  border-radius: 35px !important;
+  box-shadow: 0 4px 16px 5px #00000085 !important
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -128,6 +142,36 @@ body {
     }
 
   }
+
+  &.multiselect {
+    height: auto !important;
+
+    .selected-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 30px;
+
+      div {
+        background: #c0d7bc;
+        margin: 2px;
+        border-radius: 3px;
+        font-size: 14px;
+        padding: 0 7px;
+      }
+    }
+  }
+
+  .rs_select {
+    background: transparent;
+
+    height: 100%;
+    outline: none;
+    padding: 8px 16px 12px;
+    width: 100% !important;
+  }
 }
 
 
@@ -206,7 +250,61 @@ body {
 }
 
 
-.dashboard-content{
+.dashboard-content {
   max-height: calc(100vh - 246px);
   overflow-y: auto;
+}
+
+
+/* popup */
+
+
+.popup-root {
+  padding: 14px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1001;
+  outline: none;
+  transition: all .3s ease;
+  left: 50%;
+  transform-origin: top;
+  box-shadow: 2px 6px 29px 5px #313843bf;
+
+  // @include getDown(768px) {
+  //   width: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   margin: auto;
+  // }
+}
+
+.popup-root.open {
+  opacity: 1;
+  transform: translateY(0) translateX(-50%);
+  visibility: visible;
+}
+
+/* Styles for .close state */
+.popup-root.close {
+  transform: translateY(40px) translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup-center {
+  transform: translate(-50%, -50%) !important;
+  left: 50%;
+  top: 50%;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(33, 33, 33, 0.71);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
 }

@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useAdminDashboardState} from "../../../store/categoriesState.ts";
 import CommonTable, {CommonTableColumn} from "../../../components/CommonTable.tsx";
+import AssignRoleModal from "./AssignRoleModal.tsx";
 
 const UsersRolesManager = () => {
 
@@ -15,6 +16,8 @@ const UsersRolesManager = () => {
     function handleDelete(id: string) {
 
     }
+
+    const [openAssignRoleUserId, setOpenAssignRoleUserId] = useState("")
 
     const columns: CommonTableColumn[] = [
         {
@@ -54,8 +57,8 @@ const UsersRolesManager = () => {
             render: (_, item) => (
                 <div className="flex items-center justify-center gap-x-2">
                     {/*<button onClick={() => handleDelete(item.id)} className="btn btn-danger2 px-10">Delete</button>*/}
-                    <button className="btn btn-primary2 px-10">
-                        <Link to={`/dashboard/roles/edit/${item.slug}`}>Edit</Link>
+                    <button onClick={() => setOpenAssignRoleUserId(item.userId)} className="btn btn-primary2 px-10">
+                        Assign Role
                     </button>
                 </div>
             )
@@ -69,6 +72,15 @@ const UsersRolesManager = () => {
 
             </div>
             <h4 className="text-lg font-medium mt-2"> Add information about roles</h4>
+
+
+            <AssignRoleModal
+                roles={roles}
+                userRoles={usersRoles?.find(u => u.userId === openAssignRoleUserId)}
+                userId={openAssignRoleUserId}
+                onClose={() => setOpenAssignRoleUserId("")}
+                isOpen={!!openAssignRoleUserId}
+            />
 
             <div className="mt-10">
                 {!usersRoles.length && (
