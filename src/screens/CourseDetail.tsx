@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {api} from "../apis";
 import Reviews, {Review} from "../components/Reviews/Reviews.tsx";
 import Rating from "../components/Reviews/Rating.tsx";
@@ -8,59 +7,21 @@ import AddReview from "../components/Reviews/AddReview.tsx";
 import {Course} from "../types/course.ts";
 import BottomSheet from "../components/Reviews/BottomSheet.tsx";
 import RslPagination from "../components/Pagination/Pagination.tsx";
+import {useReviews} from "../store/useReviews.ts";
+
 
 const CourseDetail = () => {
 
     const {slug} = useParams()
     const [course, setCourse] = useState<Course>();
 
+    const [reviewPage, setReviewPage] = useState<number>(1);
+
     const [openAddReviewForm, setOpenAddReviewForm] = useState(false)
-    const [reviewInfo, setReviewInfo] = useState<{
-        reviews: Array<Review>,
-        avgRating: number,
-        total: number
-        "1": number,
-        "2": number,
-        "3": number,
-        "4": number,
-        "5": number,
-    }>({
-        reviews: [],
-        avgRating: 0,
-        total: 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-    })
 
-    function fetchCourseReviews(courseId: string) {
-        api.get(`/api/v1/courses/reviews/${courseId}`).then(res => {
-            if (res?.data?.data) {
-                const avgRating = res.data?.data?.avgRating
-                const total = res.data?.data?.total
-                const state = {
-                    ...reviewInfo,
-                    reviews: res.data?.data?.reviews,
-                    "1": res.data?.data?.["1"] || 0,
-                    "2": res.data?.data?.["2"] || 0,
-                    "3": res.data?.data?.["3"] || 0,
-                    "4": res.data?.data?.["4"] || 0,
-                    "5": res.data?.data?.["5"] || 0,
-                }
-                if (avgRating) {
-                    state.avgRating = avgRating
-                }
-                if (total) {
-                    state.total = total
-                }
-                setReviewInfo(state);
 
-            }
-        })
+    const {fetchReviews, total, avgRating, rateStats, getPaginatedItems} = useReviews()
 
-    }
 
     useEffect(() => {
         if (!slug) return
@@ -68,11 +29,27 @@ const CourseDetail = () => {
         api.get(`/api/v1/instructor/courses/${slug}`).then(res => {
             if (res.data?.data) {
                 setCourse(res.data?.data);
-                fetchCourseReviews(res.data?.data.courseId)
+                fetchReviews({
+                    pageNumber: 1,
+                    courseId: res.data?.data.courseId,
+                    orderBy: "date",
+                    order: 1
+                })
             }
         })
 
     }, [slug])
+
+    useEffect(() => {
+        if (course?.courseId) {
+            fetchReviews({
+                pageNumber: reviewPage,
+                courseId: course?.courseId,
+                orderBy: "date",
+                order: 1
+            })
+        }
+    }, [reviewPage])
 
     const [openDetailReview, setOpenDetailReview] = useState(null)
 
@@ -111,7 +88,6 @@ const CourseDetail = () => {
                             <div className="p-4">
                                 <div className="text-center">
                                     <p className="text-3xl font-bold">${course.price}</p>
-
 
                                     <button
                                         className="mt-3 px-4 py-2 bg-purple-600 text-white font-semibold rounded-md shadow-md hover:bg-purple-700">Add
@@ -175,11 +151,9 @@ const CourseDetail = () => {
 
             {openAddReviewForm && (
                 <div>
-
                     <AddReview
                         courseId={course.courseId}
-                        onClose={() => setOpenAddReviewForm(prevState => !prevState)}
-                    />
+                        onClose={() => setOpenAddReviewForm(prevState => !prevState)} updateData={undefined}                    />
 
                 </div>
             )}
@@ -190,16 +164,9 @@ const CourseDetail = () => {
                 </div>
                 <Rating
                     onClickOpenReviewForm={setOpenAddReviewForm}
-                    reviews={reviewInfo.reviews}
-                    totalReviews={reviewInfo.total}
-                    rating={{
-                        1: reviewInfo["1"],
-                        2: reviewInfo["2"],
-                        3: reviewInfo["3"],
-                        4: reviewInfo["4"],
-                        5: reviewInfo["5"],
-                    }}
-                    avgRating={reviewInfo.avgRating}
+                    totalReviews={total}
+                    rating={rateStats}
+                    avgRating={avgRating}
                     className={""}
                     onClickEdit={() => {
                     }}
@@ -213,7 +180,7 @@ const CourseDetail = () => {
                     <button onClick={() => setOpenDetailReview(true)} className="btn btn-primary2">More</button>
                 </div>
                 <Reviews
-                    reviews={reviewInfo.reviews}
+                    reviews={getPaginatedItems(1)}
                     className={""}
                     onClickEdit={() => {
                     }}
@@ -228,7 +195,7 @@ const CourseDetail = () => {
 
                         <div className="sheet-content  ">
                             <Reviews
-                                reviews={reviewInfo.reviews}
+                                reviews={getPaginatedItems(reviewPage)}
                                 className={""}
                                 onClickEdit={() => {
                                 }}
@@ -237,8 +204,13 @@ const CourseDetail = () => {
 
                         </div>
                         <div className="sheet-content-pagination">
-                            <RslPagination currentPage={1} onChange={() => {
-                            }} className="" perPageRow={10} totalItem={100}/>
+                            <RslPagination
+                                currentPage={reviewPage}
+                                onChange={({currentPage}) => setReviewPage(currentPage)}
+                                className=""
+                                perPageRow={20}
+                                totalItem={total}
+                            />
                         </div>
 
                     </div>
