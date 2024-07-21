@@ -1,0 +1,83 @@
+.rs-pagination {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	width: 100%;
+	user-select: none;
+	//border: 1px solid #414141;
+	padding: 2px 10px;
+	--main-color: rgb(66, 108, 215);
+	justify-content: end;
+
+	& > div {
+		column-gap: 14px;
+		display: flex;
+		&:nth-child(2){
+			margin-left: 4px;
+			margin-right: 4px;
+		}
+	}
+
+	//@include getDown(768px){
+	//	flex-direction: column;
+	//	justify-content: center;
+	//
+	//}
+
+	.paginationArrow {
+		//background-color: #dbdbdb;
+		background: transparent;
+		display: flex;
+		align-items: center;
+		//padding: 4px 10px;
+		//border-radius: 10px;
+		border: none;
+		outline: none;
+	}
+
+	.disable-paginationArrow {
+		pointer-events: none;
+		color: #a9a9a9;
+	}
+
+	.pagination-items {
+		display: flex;
+		align-items: center;
+		column-gap: 8px;
+
+		.pagination-item {
+			min-width: 18px;
+			height: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(45, 128, 66, 0.18);
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 12px;
+
+			&.active {
+				background: var(--main-color);
+				color: white;
+			}
+
+			&.no-page {
+				width: max-content;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+		}
+	}
+
+	.pagination-end-start-button {
+		margin-right: 15px;
+		cursor: pointer;
+		&:hover {
+			color: var(--main-color);
+		}
+	}
+	.page-of{
+		display: flex;
+		column-gap: 5px;
+	}
+}

@@ -6,6 +6,8 @@ import Reviews, {Review} from "../components/Reviews/Reviews.tsx";
 import Rating from "../components/Reviews/Rating.tsx";
 import AddReview from "../components/Reviews/AddReview.tsx";
 import {Course} from "../types/course.ts";
+import BottomSheet from "../components/Reviews/BottomSheet.tsx";
+import RslPagination from "../components/Pagination/Pagination.tsx";
 
 const CourseDetail = () => {
 
@@ -71,6 +73,8 @@ const CourseDetail = () => {
         })
 
     }, [slug])
+
+    const [openDetailReview, setOpenDetailReview] = useState(null)
 
 
     if (!course) return <h2>No, detail.</h2>
@@ -206,7 +210,7 @@ const CourseDetail = () => {
             <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
                 <div className="flex items-center justify-between">
                     <h2 className="text-3xl font-semibold ">Reviews</h2>
-                    <button className="btn btn-primary2">More</button>
+                    <button onClick={() => setOpenDetailReview(true)} className="btn btn-primary2">More</button>
                 </div>
                 <Reviews
                     reviews={reviewInfo.reviews}
@@ -215,6 +219,31 @@ const CourseDetail = () => {
                     }}
                     onClickDelete={() => {
                     }}/>
+
+                <BottomSheet isOpen={openDetailReview} onClose={() => setOpenDetailReview(null)}>
+
+                    <div className="max-w-2xl mx-auto mt-4">
+
+                        <h2 className="text-3xl font-semibold text-center mb-6">Reviews</h2>
+
+                        <div className="sheet-content  ">
+                            <Reviews
+                                reviews={reviewInfo.reviews}
+                                className={""}
+                                onClickEdit={() => {
+                                }}
+                                onClickDelete={() => {
+                                }}/>
+
+                        </div>
+                        <div className="sheet-content-pagination">
+                            <RslPagination currentPage={1} onChange={() => {
+                            }} className="" perPageRow={10} totalItem={100}/>
+                        </div>
+
+                    </div>
+
+                </BottomSheet>
             </div>
 
         </div>

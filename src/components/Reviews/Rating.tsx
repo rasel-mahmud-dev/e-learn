@@ -35,8 +35,6 @@ const Rating = ({onClickOpenReviewForm, rating, totalReviews, avgRating}) => {
 
     return (
         <div className="mt-6">
-
-
             <div className="flex items-center justify-between">
                 <h1 className="sec_label font-semibold text-2xl">Ratings & Reviews</h1>
                 <button onClick={() => onClickOpenReviewForm(prev => !prev)} className="btn btn-primary2">Rate Now
