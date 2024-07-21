@@ -11,6 +11,28 @@ const Rating = ({onClickOpenReviewForm, rating, totalReviews, avgRating}) => {
         5: 0,
     }
 
+    const classGrade = {
+        A: [100, 80],
+        B: [80, 60],
+        C: [60, 40],
+        D: [40, 20],
+        H: [20, 10],
+        I: [10, 0]
+    }
+
+    function setClasses(rate: number) {
+        const percent = Math.round((rating[rate] * 100) / totalReviews);
+        let out = "color_grade_"
+        for (let classGradeKey in classGrade) {
+            const val = classGrade[classGradeKey]
+            if (percent <= val[0] && percent >= val[1]) {
+                out = "color_grade_" +classGradeKey
+                break
+            }
+        }
+        return out
+    }
+
     return (
         <div className="mt-6">
 
@@ -45,7 +67,7 @@ const Rating = ({onClickOpenReviewForm, rating, totalReviews, avgRating}) => {
                                     <span className="w-3">{rate}</span>
                                     <BiStar title=""/>
                                 </div>
-                                <span className="user_rate-wrapper">
+                                <span className={`user_rate-wrapper ${setClasses(rate)}`}>
                                     <div style={{width: (rating[rate] * 100) / totalReviews + "%"}}
                                          className="user_rate"/>
                                 </span>
@@ -59,10 +81,10 @@ const Rating = ({onClickOpenReviewForm, rating, totalReviews, avgRating}) => {
                 <div className="mt-5">
                     {/*<h4 className="text-base font-semibold">Customer Gallery</h4>*/}
                     {/*<div className="flex flex-wrap gap-1 mt-2">*/}
-                        {/*{customerGallery?.map(img => (*/}
-                        {/*    <Image imgClass="object-cover w-10 h-10 !rounded" className=" " key={img}*/}
-                        {/*           src={getAssetPath(img)}/>*/}
-                        {/*))}*/}
+                    {/*{customerGallery?.map(img => (*/}
+                    {/*    <Image imgClass="object-cover w-10 h-10 !rounded" className=" " key={img}*/}
+                    {/*           src={getAssetPath(img)}/>*/}
+                    {/*))}*/}
                     {/*</div>*/}
 
                 </div>

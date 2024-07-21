@@ -110,3 +110,52 @@
 }
 
 
+.user_rate-wrapper {
+  &.color_grade_I {
+    background: rgba(255, 0, 0, 0.31);
+
+    .user_rate {
+      background: #ff4b4b;
+    }
+  }
+
+  &.color_grade_H {
+    background: #ff7a004f;
+
+    .user_rate {
+      background: rgba(255, 122, 0, 0.81);
+    }
+  }
+
+  &.color_grade_D {
+    background: #429da459;
+
+    .user_rate {
+      background: #56b5bb;
+    }
+  }
+
+  &.color_grade_C {
+    background: rgba(145, 159, 255, 0.42) !important;
+
+    .user_rate {
+      background: rgba(118, 136, 255, 0.51) !important;
+    }
+  }
+
+  &.color_grade_B {
+    background: rgba(77, 204, 72, 0.35) !important;
+
+    .user_rate {
+      background: rgb(66, 176, 61) !important;
+    }
+  }
+
+  &.color_grade_A {
+    background: rgba(61, 176, 149, 0.35) !important;
+
+    .user_rate {
+      background: rgb(61, 176, 149) !important;
+    }
+  }
+}

@@ -34,7 +34,8 @@ const AddReview = ({onClose, updateData, courseId}) => {
                 title: review.title,
                 summary: review.summary,
                 linkImages: review.linkImages,
-                courseId
+                courseId,
+                rate: Number(review.rate),
             })
             console.log(response)
 
