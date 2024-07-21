@@ -1,4 +1,6 @@
 export function showDateTime(date: string | Date) {
-    return new Date(date).toDateString()
+    const dt = new Date(date)
+
+    return dt.toDateString() + " " + dt.toLocaleTimeString()
 }
 

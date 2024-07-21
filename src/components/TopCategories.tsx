@@ -8,10 +8,11 @@ const TopCategories = () => {
 
     return (
         <div>
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="container mx-auto px-4 py-20">
                 <h2 className="text-3xl font-bold mb-4">Top Categories</h2>
-                <p className="text-gray-500 mb-12">Consectetur adipiscing elit sed do eiusmod tempor incididunt ut
-                    labore et dolore</p>
+                <p className="text-gray-500 mb-12 mt-4">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dolores doloribus ea et, explicabo ipsa molestiae molestias omnis pariatur quos repudiandae sed unde, ut? Adipisci asperiores assumenda at aut autem eligendi, excepturi facilis fuga harum id illum iure maiores molestiae nam omnis possimus repellat, repellendus repudiandae sed, sint tenetur voluptatum.
+                </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
 

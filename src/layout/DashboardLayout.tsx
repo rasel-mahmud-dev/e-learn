@@ -29,7 +29,11 @@ const sidebarItems = [
 
     {title: "Sub Categories", link: "/dashboard/sub-categories", icon: () => <AiFillHeart/>},
     {title: "Topics", link: "/dashboard/topics", icon: () => <AiFillHeart/>},
+
+    {title: "Instructor List", link: "/dashboard/instructor-list", icon: () => <AiFillHeart/>},
+
     {title: "Instructors", link: "/dashboard/instructors", icon: () => <AiFillHeart/>},
+
     {title: "Subscriptions", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Payment methods", link: "/dashboard/profile", icon: () => <AiFillHeart/>},
     {title: "Privacy", link: "/dashboard/profile", icon: () => <AiFillHeart/>},

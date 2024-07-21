@@ -14,7 +14,7 @@ const Hero = () => {
                     </p>
                     <button className="btn btn-primary2 mt-6">Find courses ➜</button>
                 </div>
-                <div className="md:w-1/2 flex justify-center md:justify-end">
+                <div className="flex justify-center">
                     <div className="relative">
                         <img src="https://demo.edublink.co/wp-content/uploads/2023/05/girl-1.webp" alt="Student" className="w-full h-auto" />
                         <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg flex items-center space-x-2">
