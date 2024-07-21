@@ -1,39 +1,15 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {BiCheck, BiStar} from "react-icons/bi";
-
-let image2 = `c20-rmx3063-realme-original-imagfxfzjrkqtbhe.jpeg`;
-
-const Rating = ({onClickOpenReviewForm, totalRatings, authId, ratingGroupCount, totalReviews, avgRating}) => {
+import React from "react";
+import {BiStar} from "react-icons/bi";
 
 
-    const [rating, setRating] = useState({
+const Rating = ({onClickOpenReviewForm, rating, totalReviews, avgRating}) => {
+    const ratingGroup = {
         1: 0,
         2: 0,
         3: 0,
         4: 0,
         5: 0,
-    });
-
-    useEffect(() => {
-        // if (ratingGroupCount) {
-        //     let updateRating = {...rating}
-        //     for (let ratingGroupCountElement of ratingGroupCount) {
-        //         const {_id, count} = ratingGroupCountElement
-        //         updateRating[_id] = count
-        //     }
-        //     setRating(updateRating)
-        // }
-    }, [ratingGroupCount]);
-
-
-    function totalRating() {
-        let totalAmount = 0;
-        for (const rate in rating) {
-            totalAmount += rating[rate];
-        }
-        return totalAmount;
     }
-
 
     return (
         <div className="mt-6">
@@ -48,8 +24,9 @@ const Rating = ({onClickOpenReviewForm, totalRatings, authId, ratingGroupCount, 
 
             <div>
                 <div className="flex mt-5 justify-between">
-                    <div className="px-1 md:px-1">
-                        <div className=" flex items-center font-bold text-4xl">
+
+                    <div className="px-1 md:px-1 w-5/12 justify-center flex flex-col">
+                        <div className=" flex items-center  justify-center font-bold text-4xl">
                             <span className="block font-bold text-5xl">{Number(avgRating).toFixed(1)}</span>
                             <BiStar/>
                         </div>
@@ -59,16 +36,17 @@ const Rating = ({onClickOpenReviewForm, totalRatings, authId, ratingGroupCount, 
                             <h4 className="text-grey fs-14 flex">Reviews</h4>
                         </div>
                     </div>
+
                     <div className="ml-1 md:ml-10 w-full">
 
-                        {Object.keys(rating).map(rate => (
+                        {Object.keys(ratingGroup).map(rate => (
                             <div className="rate w-full" key={rate}>
                                 <div className="flex items-center bg-transparent rating-star ">
                                     <span className="w-3">{rate}</span>
                                     <BiStar title=""/>
                                 </div>
                                 <span className="user_rate-wrapper">
-                                    <div style={{width: (rating[rate] * 100) / totalRating() + "%"}}
+                                    <div style={{width: (rating[rate] * 100) / totalReviews + "%"}}
                                          className="user_rate"/>
                                 </span>
                                 <span className="rate-amount text-grey fs-14 ml-5">{rating[rate]}</span>
@@ -79,17 +57,16 @@ const Rating = ({onClickOpenReviewForm, totalRatings, authId, ratingGroupCount, 
                 </div>
 
                 <div className="mt-5">
-                    <h4 className="text-base font-semibold">Customer Gallery</h4>
-                    <div className="flex flex-wrap gap-1 mt-2">
+                    {/*<h4 className="text-base font-semibold">Customer Gallery</h4>*/}
+                    {/*<div className="flex flex-wrap gap-1 mt-2">*/}
                         {/*{customerGallery?.map(img => (*/}
                         {/*    <Image imgClass="object-cover w-10 h-10 !rounded" className=" " key={img}*/}
                         {/*           src={getAssetPath(img)}/>*/}
                         {/*))}*/}
-                    </div>
+                    {/*</div>*/}
 
                 </div>
             </div>
-
 
 
         </div>

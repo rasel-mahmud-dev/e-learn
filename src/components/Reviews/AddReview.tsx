@@ -80,7 +80,7 @@ const AddReview = ({onClose, updateData, courseId}) => {
     return (
         <div>
             <Popup
-                className="max-w-2xl w-[95%] bg-white !fixed top-1/4"
+                className="max-w-2xl w-[95%] bg-white !fixed top-1/4 overflow-y-auto"
                 onClose={() => onClose()}
                 isOpen={true}>
 
@@ -98,7 +98,7 @@ const AddReview = ({onClose, updateData, courseId}) => {
                                 <TextInput label="Title" name="title" value={review.title} onChange={handleChange}
                                            className="mb-4"/>
 
-                                <TextInput type="textarea" label="Summary" name="summary" value={review.summary}
+                                <TextInput as="textarea" label="Summary" name="summary" value={review.summary}
                                            className="mb-4"
                                            onChange={handleChange}/>
 
@@ -119,22 +119,22 @@ const AddReview = ({onClose, updateData, courseId}) => {
                                 {/*/>*/}
 
 
-                                <TextInput
-                                    placeholder="comma seperate link"
-                                    type="textarea"
-                                    label="Image Link"
-                                    name="linkImages"
-                                    value={review.linkImages}
-                                    onChange={handleChange}/>
+                                {/*<TextInput*/}
+                                {/*    placeholder="comma seperate link"*/}
+                                {/*    type="textarea"*/}
+                                {/*    label="Image Link"*/}
+                                {/*    name="linkImages"*/}
+                                {/*    value={review.linkImages}*/}
+                                {/*    onChange={handleChange}/>*/}
                             </div>
 
 
                         </div>
-                        <div>
+
                             <button className="btn btn-primary2 mt-8"
                                     type="submit">{updateData ? "Update" : "Submit"} Review
                             </button>
-                        </div>
+
                     </form>
                 </div>
 

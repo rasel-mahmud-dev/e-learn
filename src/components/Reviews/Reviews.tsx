@@ -43,7 +43,7 @@ const Reviews: FC<ReviewsProps> = ({reviews, className, isModAble = false, onCli
                         </div>}
                     </div>
 
-                    <p className="text-sm text-gray-500 mt-2">{review?.summary}</p>
+                    <p className="text-sm text-gray-500 mt-2 whitespace-pre-line">{review?.summary}</p>
 
                     <div className="flex gap-1 mt-4 flex-wrap">
                         {review?.images?.map(img => (

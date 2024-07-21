@@ -17,10 +17,20 @@ const CourseDetail = () => {
         reviews: Array<Review>,
         avgRating: number,
         total: number
+        "1": number,
+        "2": number,
+        "3": number,
+        "4": number,
+        "5": number,
     }>({
         reviews: [],
         avgRating: 0,
-        total: 0
+        total: 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
     })
 
     function fetchCourseReviews(courseId: string) {
@@ -28,7 +38,15 @@ const CourseDetail = () => {
             if (res?.data?.data) {
                 const avgRating = res.data?.data?.avgRating
                 const total = res.data?.data?.total
-                const state = {...reviewInfo, reviews: res.data?.data?.reviews}
+                const state = {
+                    ...reviewInfo,
+                    reviews: res.data?.data?.reviews,
+                    "1": res.data?.data?.["1"] || 0,
+                    "2": res.data?.data?.["2"] || 0,
+                    "3": res.data?.data?.["3"] || 0,
+                    "4": res.data?.data?.["4"] || 0,
+                    "5": res.data?.data?.["5"] || 0,
+                }
                 if (avgRating) {
                     state.avgRating = avgRating
                 }
@@ -170,6 +188,13 @@ const CourseDetail = () => {
                     onClickOpenReviewForm={setOpenAddReviewForm}
                     reviews={reviewInfo.reviews}
                     totalReviews={reviewInfo.total}
+                    rating={{
+                        1: reviewInfo["1"],
+                        2: reviewInfo["2"],
+                        3: reviewInfo["3"],
+                        4: reviewInfo["4"],
+                        5: reviewInfo["5"],
+                    }}
                     avgRating={reviewInfo.avgRating}
                     className={""}
                     onClickEdit={() => {

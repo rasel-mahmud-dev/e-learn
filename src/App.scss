@@ -121,8 +121,14 @@ body {
 
   &-textarea {
     //background: red;
-    min-height: 100px;
-    height: 100% !important;
+    //min-height: 100px;
+    height: auto !important;
+
+
+    .el-text-input{
+      //background: red;
+      height: 100%;
+    }
 
     .el-form-label {
       width: 100%;
