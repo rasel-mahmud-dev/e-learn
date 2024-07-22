@@ -125,7 +125,7 @@ body {
     height: auto !important;
 
 
-    .el-text-input{
+    .el-text-input {
       //background: red;
       height: 100%;
     }
@@ -313,4 +313,39 @@ body {
   left: 0;
   top: 0;
   z-index: 1000;
+}
+
+.category-dropdown {
+  @apply absolute   left-0 z-50 bg-white     w-full mx-auto;
+  width: max-content;
+
+  top: 50px;
+  background: #ffffff;
+  box-shadow: 6px 4px 20px 0px #444444a3;
+  border-radius: 9px;
+  padding: 10px 2px;
+
+  .dropdown-section {
+    padding: 5px 5px;
+
+    & > div {
+      column-gap: 50px;
+      padding: 3px 8px;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(62, 142, 59, 0.27);
+      }
+
+      svg {
+        font-size: 8px;
+      }
+    }
+
+    h4 {
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
 }

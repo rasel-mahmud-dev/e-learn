@@ -2,6 +2,7 @@ import {create} from 'zustand'
 import adminDashboardService from "./services/adminDashboardService.ts";
 import instructorZoneService from "./services/instructorZoneService.ts";
 import {a} from "vite/dist/node/types.d-aGj9QkWt";
+import subCategories from "../screens/AdminDashboard/SubCategories.tsx";
 
 type CategoryType = {
     slug: string,
@@ -12,23 +13,37 @@ type CategoryType = {
 
 interface CategoryStateType {
     categories: CategoryType[],
+    subCategories: CategoryType[],
     topics: any,
-    setCategory: (cat: CategoryType[]) => void,
-    setTopics: (cat: any) => void,
+    fetchCategories: () => void,
+    fetchTopics: () => void,
+    fetchSubCategories: () => void,
 
 }
 
 export const useCategoryState = create<CategoryStateType>((set) => ({
     categories: [],
+    subCategories: [],
     topics: [],
-    setCategory: (cat) => set((state) => ({
-        ...state,
-        categories: cat,
-    })),
-    setTopics: (cat) => set((state) => ({
-        ...state,
-        topics: cat,
-    }))
+
+    fetchTopics: async function () {
+        const topics = await adminDashboardService.fetchTopics()
+        return set(state => {
+            return {...state, topics}
+        })
+    },
+    fetchCategories: async function () {
+        const categories = await adminDashboardService.fetchCategories()
+        return set(state => {
+            return {...state, categories}
+        })
+    },
+    fetchSubCategories: async function () {
+        const subCategories = await adminDashboardService.fetchSubCategories()
+        return set(state => {
+            return {...state, subCategories}
+        })
+    },
 
 }))
 

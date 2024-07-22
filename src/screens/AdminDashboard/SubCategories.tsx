@@ -34,7 +34,7 @@ const SubCategories = () => {
         {
             name: "CreatedAt",
             field: "createdAt",
-            render: (i)=>showDateTime(i)
+            render: (i) => showDateTime(i)
         },
         {
             name: "Action",

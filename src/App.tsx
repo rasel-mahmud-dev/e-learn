@@ -1,42 +1,23 @@
 import './App.scss'
 import React, {useEffect} from "react";
-import {useAuthState} from "./store/authState.ts";
-import {api} from "./apis";
 import {useCategoryState} from "./store/categoriesState.ts";
 import {RouterProvider} from "react-router-dom";
 import router from "./routes";
 
 
 function App() {
-    const { setAuth} = useAuthState()
-    const { setCategory, setTopics} = useCategoryState()
+    const {fetchCategories, fetchTopics, fetchSubCategories} = useCategoryState()
 
     useEffect(() => {
-
-        api.get("/categories").then(res => {
-            setCategory(res?.data?.data || [])
-        })
-
-        api.get("/api/v1/auth/verify").then(res => {
-            setAuth(res?.data?.auth)
-        })
-
-        api.get("/topics").then(res => {
-            setTopics(res.data)
-        })
-
-
-
+        fetchSubCategories()
+        fetchTopics()
+        fetchCategories()
     }, [])
 
 
     return (
         <>
-
-
             <RouterProvider router={router}/>
-
-
         </>
     )
 }
