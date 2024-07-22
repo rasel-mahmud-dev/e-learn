@@ -14,14 +14,10 @@ const CourseDetail = () => {
 
     const {slug} = useParams()
     const [course, setCourse] = useState<Course>();
-
     const [reviewPage, setReviewPage] = useState<number>(1);
-
     const [openAddReviewForm, setOpenAddReviewForm] = useState(false)
 
-
     const {fetchReviews, total, avgRating, rateStats, getPaginatedItems} = useReviews()
-
 
     useEffect(() => {
         if (!slug) return
@@ -49,7 +45,7 @@ const CourseDetail = () => {
                 order: 1
             })
         }
-    }, [reviewPage])
+    }, [fetchReviews, reviewPage])
 
     const [openDetailReview, setOpenDetailReview] = useState(null)
 
@@ -57,7 +53,6 @@ const CourseDetail = () => {
     if (!course) return <h2>No, detail.</h2>
 
     return (
-
         <div className="container py-6 flex flex-col justify-center sm:py-12">
 
             <div className="relative p-8 bg-white shadow-sm sm:rounded-xl">
@@ -153,7 +148,7 @@ const CourseDetail = () => {
                 <div>
                     <AddReview
                         courseId={course.courseId}
-                        onClose={() => setOpenAddReviewForm(prevState => !prevState)} updateData={undefined}                    />
+                        onClose={() => setOpenAddReviewForm(prevState => !prevState)} updateData={undefined}/>
 
                 </div>
             )}

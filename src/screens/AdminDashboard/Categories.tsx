@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useAdminDashboardState} from "../../store/categoriesState.ts";
 import {Link} from "react-router-dom";
 import CommonTable, {CommonTableColumn} from "../../components/CommonTable.tsx";
+import {showDateTime} from "../../utils/date.ts";
 
 const Categories = () => {
 
@@ -32,7 +33,8 @@ const Categories = () => {
         },
         {
             name: "CreatedAt",
-            field: "createdAt"
+            field: "createdAt",
+            render: (i)=>showDateTime(i)
         },
         {
             name: "Action",

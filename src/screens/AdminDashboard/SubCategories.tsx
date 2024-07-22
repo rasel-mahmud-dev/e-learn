@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useAdminDashboardState} from "../../store/categoriesState.ts";
 import {Link} from "react-router-dom";
 import CommonTable, {CommonTableColumn} from "../../components/CommonTable.tsx";
+import {showDateTime} from "../../utils/date.ts";
 
 const SubCategories = () => {
 
@@ -32,7 +33,8 @@ const SubCategories = () => {
         },
         {
             name: "CreatedAt",
-            field: "createdAt"
+            field: "createdAt",
+            render: (i)=>showDateTime(i)
         },
         {
             name: "Action",
@@ -53,7 +55,7 @@ const SubCategories = () => {
             <div className="flex items-center justify-between">
                 <h1 className="text-4xl font-semibold">Sub Categories</h1>
                 <button className="btn btn-primary2 mt-5 px-20">
-                    <Link to="/admin-dashboard/sub-categories/add">New Category</Link>
+                    <Link to="/admin-dashboard/sub-categories/add">New</Link>
                 </button>
             </div>
             <h4 className="text-lg font-medium mt-2"> Add information about sub categories</h4>
