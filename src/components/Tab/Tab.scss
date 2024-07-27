@@ -1,0 +1,42 @@
+.rs-tab {
+  display: flex;
+  align-items: center;
+  column-gap: 0px;
+  background: #f3f3f3;
+  padding: 0 5px;
+  width: max-content;
+  border-radius: 10px;
+
+  &-el {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    .bar {
+      width: 20px;
+      height: 2px;
+      background: red;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .icon {
+      //box-shadow: 0 2px 2px 3px red;
+      font-size: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav__light{
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 35 px;
+      position: absolute;
+      background: linear-gradient(180deg, rgba(217, 217, 217, 0.15), #747474 88%)
+    }
+  }
+}

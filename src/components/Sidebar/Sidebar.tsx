@@ -79,8 +79,6 @@ function Item({item, noChild, toggleExpand}) {
                     ) : (
                         <>
                             <h4> {item.title} </h4>
-
-
                         </>
                     )
                 }

@@ -2,6 +2,7 @@ import {Link, useParams} from "react-router-dom";
 import {useCategoryState} from "../store/categoriesState.ts";
 import {useEffect, useMemo, useState} from "react";
 import {api} from "../apis";
+import Tab from "../components/Tab/Tab.tsx";
 
 interface CourseDetail {
     id: number;
@@ -50,6 +51,10 @@ function TopicSearch() {
                 <a className="tab tab-bordered tab-active">Most popular</a>
                 <a className="tab tab-bordered">New</a>
                 <a className="tab tab-bordered">Beginner Favorites</a>
+            </div>
+
+            <div className="tabs mb-6">
+                <Tab />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

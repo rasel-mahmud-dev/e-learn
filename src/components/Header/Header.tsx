@@ -1,74 +1,10 @@
 import React, {useState} from 'react';
 import {useCategoryState} from "../../store/categoriesState.ts";
 import {Link} from "react-router-dom";
-import {TfiAngleRight} from "react-icons/tfi";
 import {useAuthState} from "../../store/authState.ts";
+import CategoryDropdown from "../CategoryDropdown/CategoryDropdown.tsx";
+import SearchHints from "../SearchHints/SearchHints.tsx";
 
-
-function CategoryDropdown({categories, subCategories, topics, isOpen, setOpen}) {
-
-
-    const [selectedCate, setSelelectedCat] = useState(null);
-
-    function handleMouseLeave() {
-        setOpen(false);
-    }
-
-    return isOpen && (
-        <div className="category-dropdown"
-             onMouseLeave={handleMouseLeave}>
-
-            <div className="flex gap-x-5">
-
-                <div className="dropdown-section w-full">
-                    {categories.map(cat => (
-
-                        <div onClick={() => setSelelectedCat(cat.id)}
-                             className="max-w-2xl w-full flex justify-between items-center ">
-
-                            <h4>{cat.title}</h4>
-
-                            <TfiAngleRight className="text-xs"/>
-
-                        </div>
-                    ))}
-                </div>
-
-
-                {selectedCate == 1 && (
-                    <div className="dropdown-section  w-full">
-                        {subCategories?.map(cat => (
-
-                            <div onClick={() => setSelelectedCat(cat.id)}
-                                 className="max-w-2xl w-full flex justify-between items-center ">
-                                <h4>{cat.title}</h4>
-                                <TfiAngleRight className="text-xs"/>
-
-                            </div>
-                        ))}
-
-                    </div>
-                )}
-
-
-                {selectedCate == 1 && (
-                    <div className="dropdown-section  w-full">
-                        {topics?.map(top => (
-
-                            <Link onClick={() => setOpen(false)} to={`/topic/${top.slug}`}
-                                  className="flex justify-between items-center">
-                                <h4>{top.title}</h4>
-                                <TfiAngleRight className="text-xs"/>
-                            </Link>
-                        ))}
-
-                    </div>
-                )}
-            </div>
-
-        </div>
-    )
-}
 
 const Header = () => {
 
@@ -76,6 +12,7 @@ const Header = () => {
     const {auth, logout} = useAuthState()
 
     const [isOpen, setOpen] = useState("")
+    const [isSearchSuggestion,setSearchSuggestion] = useState(false)
 
 
     function handleLogout() {
@@ -106,10 +43,13 @@ const Header = () => {
                     </div>
 
 
-                    <div className="flex items-center w-full">
-                        <input type="text" placeholder="Search for courses"
+                    <div className="relative flex items-center w-full">
+                        <input onClick={()=>setSearchSuggestion(prev=>!prev)} type="text" placeholder="Search for courses"
                                className="w-full mr-4 rounded-full border border-gray-300 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"/>
                         <i className="bi bi-search"></i>
+
+                        <SearchHints isShowSearchSuggestion={isSearchSuggestion} />
+
                     </div>
 
 
