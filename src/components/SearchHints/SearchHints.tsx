@@ -1,16 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import "./SearchHints.scss"
-import {BsClock} from "react-icons/bs";
+import useDebounce from "../../hooks/useDebounce.tsx";
+import {api} from "../../apis";
 
-const getName(){
-    return (
-        <div>
-            <h1>This is h1  tag. and it will shown as heading.</h1>
-        </div>
-    )
-}
-const SearchHints = ({isShowSearchSuggestion}) => {
+
+const SearchHints = ({isShowSearchSuggestion, value}) => {
+
+    const db = useDebounce(handleSearch, 500)
+
+    const [searchSuggestions, setSearchSuggestions] = useState([])
+
+    async function handleSearch(value: string) {
+        try {
+            api.post("/api/v1/courses/search", {value: value})
+
+            api.post("/api/v1/courses/search-suggestion", {query: value}).then(({data}) => {
+                if (data?.suggestions) {
+                    setSearchSuggestions(data?.suggestions)
+                }
+            })
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    useEffect(() => {
+        db(value)
+    }, [value]);
+
+
     return isShowSearchSuggestion && (
         <div className="SearchHints">
             <div className="flex gap-x-2 text-sm items-center">
@@ -20,9 +39,9 @@ const SearchHints = ({isShowSearchSuggestion}) => {
 
             <div>
 
-                {Array.from({length: 100}).map((_item, i) => (
+                {searchSuggestions.map((_item, i) => (
                     <li className="search-hints-item" key={i}>
-                        {}
+                        {_item}
                     </li>
                 ))}
 

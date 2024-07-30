@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {useAuthState} from "../../store/authState.ts";
 import CategoryDropdown from "../CategoryDropdown/CategoryDropdown.tsx";
 import SearchHints from "../SearchHints/SearchHints.tsx";
+import useDebounce from "../../hooks/useDebounce.tsx";
 
 
 const Header = () => {
@@ -12,7 +13,8 @@ const Header = () => {
     const {auth, logout} = useAuthState()
 
     const [isOpen, setOpen] = useState("")
-    const [isSearchSuggestion,setSearchSuggestion] = useState(false)
+    const [searchValue, setSearchValue] = useState("")
+    const [isSearchSuggestion, setSearchSuggestion] = useState(false)
 
 
     function handleLogout() {
@@ -31,7 +33,7 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        <div className="relative py-4"  onMouseLeave={() => setOpen(false)}>
+                        <div className="relative py-4" onMouseLeave={() => setOpen(false)}>
                             <p className="font-medium cursor-pointer"
                                onMouseOver={() => setOpen(true)}>Categories</p>
 
@@ -44,11 +46,14 @@ const Header = () => {
 
 
                     <div className="relative flex items-center w-full">
-                        <input onClick={()=>setSearchSuggestion(prev=>!prev)} type="text" placeholder="Search for courses"
+                        <input onClick={() => setSearchSuggestion(prev => !prev)} type="text"
+                               placeholder="Search for courses"
+                               onChange={(e)=>setSearchValue(e.target.value)}
+                               value={searchValue}
                                className="w-full mr-4 rounded-full border border-gray-300 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"/>
                         <i className="bi bi-search"></i>
 
-                        <SearchHints isShowSearchSuggestion={isSearchSuggestion} />
+                        <SearchHints value={searchValue} isShowSearchSuggestion={isSearchSuggestion}/>
 
                     </div>
 
