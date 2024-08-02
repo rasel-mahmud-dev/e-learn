@@ -6,6 +6,7 @@ interface SelectProps extends InputHTMLAttributes<HTMLSelectElement> {
     multiple?: boolean;
     options: any
     optName: string,
+    inputClassName?: string,
     optId: string,
 }
 
@@ -20,6 +21,7 @@ const MultiSelect: FC<SelectProps> = (props) => {
         as = "input",
         placeholder,
         className = "",
+        inputClassName = "",
         label,
         value,
         onChange
@@ -89,7 +91,7 @@ const MultiSelect: FC<SelectProps> = (props) => {
                 ))}
             </div>}
 
-            <select onChange={handleChange} className="rs_select">
+            <select onChange={handleChange} className={`${inputClassName} rs_select`}>
                 {placeholder && (
                     <option value="">{placeholder}</option>
                 )}
