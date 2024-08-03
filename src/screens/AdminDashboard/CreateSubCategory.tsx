@@ -3,6 +3,8 @@ import TextInput from "../../components/components/TextInput.tsx";
 import {useAuthState} from "../../store/authState.ts";
 import {api} from "../../apis";
 import {useParams} from "react-router-dom";
+import MultiSelect from "../../components/components/MultiSelect.tsx";
+import {useAdminDashboardState} from "../../store/categoriesState.ts";
 
 const formInputs = [
     {name: "Title", field: "title", helper: "", placeholder: "Enter title"},
@@ -20,11 +22,14 @@ type CategoryState = {
     title: string,
     description: string,
     image: string,
+    categories: string[],
 }
 
 const CreateSubCategory = () => {
 
     const {updateSlug} = useParams()
+
+    const {categories, fetchCategories} = useAdminDashboardState()
 
     const [state, setState] = useState<CategoryState>({})
 
@@ -34,11 +39,20 @@ const CreateSubCategory = () => {
 
     function handleSave(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        api.post("/sub-categories", [state]).then(res => {
-            console.log(res)
-        })
+        if (updateSlug) {
+            api.patch(`/sub-categories/${updateSlug}`, state).then(res => {
+                console.log(res)
+            })
+        } else {
+            api.post("/sub-categories", [state]).then(res => {
+                console.log(res)
+            })
+        }
     }
 
+    useEffect(() => {
+        fetchCategories()
+    }, []);
 
     useEffect(() => {
         if (updateSlug) {
@@ -49,11 +63,11 @@ const CreateSubCategory = () => {
                 if (data.title) updatedState["title"] = data.title
                 if (data.description) updatedState["description"] = data.description
                 if (data.image) updatedState["image"] = data.image
+                if (data.categories) updatedState["categories"] = data.categories
                 setState(prevState => ({...prevState, ...updatedState}))
             })
         }
     }, [updateSlug])
-
 
     return (
         <div className="max-w-3xl w-full mx-auto">
@@ -61,6 +75,21 @@ const CreateSubCategory = () => {
             <h4 className="text-lg font-medium mt-2"> Add information about category</h4>
 
             <form onSubmit={handleSave}>
+
+                <div className="mt-8">
+
+                    <MultiSelect
+                        label="Categories"
+                        multiple={true}
+                        name="categories"
+                        value={state.categories}
+                        options={categories}
+                        placeholder="Select categories"
+                        optName={"title"}
+                        onChange={handleChange}
+                        optId={"id"}
+                    />
+                </div>
 
                 {formInputs.map(input => (
 

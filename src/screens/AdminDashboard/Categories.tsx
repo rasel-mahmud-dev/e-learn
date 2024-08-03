@@ -50,6 +50,9 @@ const Categories = () => {
             )
         }
     ];
+
+    console.log(categories)
+
     return (
         <div className="container w-full mx-auto">
             <div className="flex items-center justify-between">

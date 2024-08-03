@@ -43,7 +43,6 @@ const CreateTopic = () => {
     function handleSave(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if (updateSlug) {
-            console.log(state)
             api.patch(`/topics/${updateSlug}`, state).then(res => {
                 console.log(res)
             })
@@ -63,6 +62,7 @@ const CreateTopic = () => {
                 if (data.title) updatedState["title"] = data.title
                 if (data.description) updatedState["description"] = data.description
                 if (data.image) updatedState["image"] = data.image
+                if (data.subCategories) updatedState["subCategories"] = data.subCategories
                 setState(prevState => ({...prevState, ...updatedState}))
             })
         }
