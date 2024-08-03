@@ -2,24 +2,23 @@ import React from 'react';
 import Rate from "../Reviews/Rate.tsx";
 
 const HorizontalStyle = (props) => {
-    const {title, price, authorName, thumbnail} = props
+    const {title, description, price, authorName, thumbnail} = props
     return (
         <div class="flex w-full overflow-hidden  ">
-            <img class="w-[350px]" src={thumbnail} alt="Course Image"/>
+            <img class="w-full max-w-[350px] h-[180px] object-cover" src={thumbnail} alt="Course Image"/>
             <div>
                 <div className="px-6 ">
-                    <div className="font-bold text-xl mb-2">The Complete 2024 Web Development Bootcamp</div>
+                    <div className="font-bold text-xl mb-2">{title}</div>
                     <p className="text-gray-700 text-base">
-                        Become a Full-Stack Web Developer with just ONE course. HTML, CSS, Javascript, Node, React,
-                        PostgreSQL, Web3 and DApps
+                        {description}
                     </p>
                 </div>
-                <div className="px-6  ">
+                <div className="px-6 mt-2 ">
                     <p
-                        className=" text-sm font-semibold text-gray-700  ">Dr. Angela Yu
+                        className=" text-sm font-semibold text-gray-700">Dr. Angela Yu
                     </p>
                     <p
-                        className=" text-sm font-semibold text-gray-700  ">Developer
+                        className=" text-sm font-semibold text-gray-700">Developer
                         and Lead Instructor</p>
 
 
@@ -39,7 +38,7 @@ const HorizontalStyle = (props) => {
             </div>
             <div>
                 <div className="px-6 pt-4 pb-2 ">
-                    <p className="text-xl font-bold">$12.99</p>
+                    <p className="text-xl font-bold">${price.toFixed(2)}</p>
                     <p className="line-through text-gray-500">$74.99</p>
                 </div>
             </div>

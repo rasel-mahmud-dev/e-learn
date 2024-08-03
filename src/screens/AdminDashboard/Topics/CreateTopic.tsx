@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {api} from "../../../apis";
 import TextInput from "../../../components/components/TextInput.tsx";
+import MultiSelect from "../../../components/components/MultiSelect.tsx";
+import {useAdminDashboardState} from "../../../store/categoriesState.ts";
 
 const formInputs = [
     {name: "Title", field: "title", helper: "", placeholder: "Enter title"},
@@ -19,11 +21,18 @@ type CategoryState = {
     title: string,
     description: string,
     image: string,
+    subCategories: Array<string>
 }
 
 const CreateTopic = () => {
 
     const {updateSlug} = useParams()
+
+    const {subCategories, fetchSubCategories} = useAdminDashboardState()
+
+    useEffect(() => {
+        fetchSubCategories()
+    }, []);
 
     const [state, setState] = useState<CategoryState>({})
 
@@ -33,9 +42,16 @@ const CreateTopic = () => {
 
     function handleSave(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        api.post("/topics", [state]).then(res => {
-            console.log(res)
-        })
+        if (updateSlug) {
+            console.log(state)
+            api.patch(`/topics/${updateSlug}`, state).then(res => {
+                console.log(res)
+            })
+        } else {
+            api.post("/topics", [state]).then(res => {
+                console.log(res)
+            })
+        }
     }
 
     useEffect(() => {
@@ -51,7 +67,7 @@ const CreateTopic = () => {
             })
         }
     }, [updateSlug])
-    
+
     return (
         <div className="max-w-3xl w-full mx-auto">
             <h1 className="text-4xl font-semibold">{updateSlug ? "Update " : "Create "} Topics </h1>
@@ -59,9 +75,22 @@ const CreateTopic = () => {
 
             <form onSubmit={handleSave}>
 
+                <div className="mt-8">
+
+                    <MultiSelect
+                        label="Sub Categories"
+                        multiple={true}
+                        name="subCategories"
+                        value={state.subCategories}
+                        options={subCategories ?? []}
+                        placeholder="Select sub categories"
+                        optName={"title"}
+                        onChange={handleChange}
+                        optId={"id"}
+                    />
+                </div>
+
                 {formInputs.map(input => (
-
-
                     <div className="mt-4">
                         <TextInput onChange={handleChange} name={input.field} label={input.name}
                                    placeholder={input.placeholder}

@@ -10,7 +10,6 @@ const HomePage = () => {
             <Hero />
             <TopCategories />
             <TopCourse/>
-            <AllCourses />
         </div>
     );
 };

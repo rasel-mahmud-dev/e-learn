@@ -349,3 +349,28 @@ body {
     }
   }
 }
+
+
+.rs-tabs {
+  display: flex;
+  column-gap: 20px;
+  border-bottom: 2px solid rgba(173, 173, 173, 0.45);
+
+  .rs-tab {
+    list-style: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
+    cursor: pointer;
+
+    &.rs-tab-active::after {
+      content: "";
+      position: absolute;
+      background: red;
+      width: 100%;
+      left: 0;
+      bottom: -2px;
+      height: 2px;
+    }
+  }
+}

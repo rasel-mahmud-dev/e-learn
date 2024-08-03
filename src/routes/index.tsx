@@ -37,7 +37,10 @@ const router = createBrowserRouter([
                 path: "",
                 element: <HomePage/>
             },
-
+            {
+                path: "/courses/:category/:subCategory",
+                element: <TopicSearch/>
+            },
             {
                 path: "/course/:slug",
                 element: <CourseDetail/>

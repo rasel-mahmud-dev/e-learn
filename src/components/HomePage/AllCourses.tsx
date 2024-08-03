@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useTopCourses} from "../../store/useTopCourses.ts";
 import {Link} from "react-router-dom";
-import Rate from "../Reviews/Rate.tsx";
 import HorizontalStyle from "../Course/HorizontalStyle.tsx";
 import {FaFilter} from "react-icons/fa";
-import TextInput from "../components/TextInput.tsx";
 import MultiSelect from "../components/MultiSelect.tsx";
 import {useAdminDashboardState} from "../../store/categoriesState.ts";
 import {BsChevronDown, BsChevronUp} from "react-icons/bs";
@@ -23,42 +21,46 @@ const AllCourses = () => {
 
     return (
         <div className="container mx-auto px-4 py-10">
-            <h2 className="text-3xl font-bold  ">All Web Development courses</h2>
-            <p className="text-gray-500 mb-8 mt-4">
-                Each aspect of creating websites and applications entails a unique set of skills. Udemy offers a host of
-                courses <br/>
-                to bring you up to speed on modern front-end, back-end, and fullstack web development practices and
-                skills.
-            </p>
+            {/*<h2 className="text-3xl font-bold  ">All Web Development courses</h2>*/}
+            {/*<p className="text-gray-500 mb-8 mt-4">*/}
+            {/*    Each aspect of creating websites and applications entails a unique set of skills. Udemy offers a host of*/}
+            {/*    courses <br/>*/}
+            {/*    to bring you up to speed on modern front-end, back-end, and fullstack web development practices and*/}
+            {/*    skills.*/}
+            {/*</p>*/}
 
-            <div className="flex items-center gap-x-3">
-                <button onClick={() => setOpenFilterSidebar(prev => !prev)}
-                        className="flex items-center btn btn-black ">
-                    {<FaFilter/>}
-                    <span>Filter</span>
-                </button>
 
-                <div>
-                    <MultiSelect
-                        multiple={false}
-                        optName="name"
-                        inputClassName="!pb-0 !pt-4"
-                        optId="id"
-                        label="Sort By"
-                        options={[
-                            {name: "Most Popular", id: 1},
-                            {name: "Highest Rated", id: 2},
-                            {name: "Newest", id: 3},
-                        ]}
-                        className="py-3"
-                        la
-                        value={"SDFFFFFFFF"}
-                        onChange={"handleChange"}
-                        name={"input.field"}
-                    />
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-x-3">
+                    <button onClick={() => setOpenFilterSidebar(prev => !prev)}
+                            className="flex items-center btn btn-black ">
+                        {<FaFilter/>}
+                        <span>Filter</span>
+                    </button>
+
+                    <div>
+                        <MultiSelect
+                            multiple={false}
+                            optName="name"
+                            inputClassName="!pb-0 !pt-4"
+                            optId="id"
+                            label="Sort By"
+                            options={[
+                                {name: "Most Popular", id: 1},
+                                {name: "Highest Rated", id: 2},
+                                {name: "Newest", id: 3},
+                            ]}
+                            className="py-3"
+                            la
+                            value={"SDFFFFFFFF"}
+                            onChange={"handleChange"}
+                            name={"input.field"}
+                        />
+                    </div>
                 </div>
-
+                <h1 className="text-2xl text-gray-900 font-semibold">{courses.length} results</h1>
             </div>
+
 
             <div className="flex gap-x-4">
                 {openFilterSidebar && <FilterSidebar expandFilterSections={expandFilterSections}
@@ -69,8 +71,9 @@ const AllCourses = () => {
                             <div className=" border-b mt-4 pb-4 border-gray-300">
                                 <HorizontalStyle
                                     key={course.id}
-                                    thumbnail={"https://img-b.udemycdn.com/course/480x270/6048973_c5b2_15.jpg"}
+                                    thumbnail={course.thumbnail}
                                     title={course.title}
+                                    description={course.description}
                                     authorName={course.price}
                                     price={course.price}
                                 />
@@ -149,7 +152,7 @@ function FilterSidebar({expandFilterSections, setExpandFilterSections}) {
     useEffect(() => {
         fetchSubCategories()
         fetchTopics()
-    }, []);
+    }, [fetchSubCategories, fetchTopics]);
 
     const items = [
         {label: "Ratings", data: ratings, render: RenderRatingItem},

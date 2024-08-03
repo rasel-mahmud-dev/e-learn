@@ -32,7 +32,7 @@ const TopCourse = () => {
                         <div className="card car">
                             <div className="w-full">
                                 <img className="w-[500px] object-cover"
-                                     src="https://img-b.udemycdn.com/course/480x270/6048973_c5b2_15.jpg" alt=""/>
+                                     src={course.thumbnail} alt=""/>
                             </div>
 
                             <div className="">
