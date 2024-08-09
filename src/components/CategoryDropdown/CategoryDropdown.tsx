@@ -6,12 +6,23 @@ import {Link} from "react-router-dom";
 function CategoryDropdown({categories, subCategories, topics, isOpen, setOpen}) {
 
 
-    const [selectedCate, setSelelectedCat] = useState(null);
+    const [selectedCate, setSelelectedCat] = useState<string>("");
+    const [selectedSubCate, setSelectedSubCate] = useState<string>("");
+
 
     function handleMouseLeave() {
         setOpen(false);
-        setSelelectedCat(null)
+        setSelectedSubCate("")
+        setSelelectedCat("")
     }
+
+    function makeCateUrl() {
+        const cat = categories.find(category => category.id === selectedCate);
+        const subCat = subCategories.find(subCat => subCat.id === selectedSubCate);
+
+        return `${cat?.slug}/${subCat?.slug}`
+    }
+
 
     return isOpen && (
         <div className="category-dropdown"
@@ -22,7 +33,7 @@ function CategoryDropdown({categories, subCategories, topics, isOpen, setOpen}) 
                 <div className="dropdown-section w-full">
                     {categories.map(cat => (
 
-                        <div onClick={() => setSelelectedCat(cat.id)}
+                        <div onMouseEnter={() => setSelelectedCat(cat.id)}
                              className="max-w-2xl w-full flex justify-between items-center ">
 
                             <h4>{cat.title}</h4>
@@ -34,33 +45,34 @@ function CategoryDropdown({categories, subCategories, topics, isOpen, setOpen}) 
                 </div>
 
 
-                {selectedCate == 1 && (
-                    <div className="dropdown-section  w-full">
-                        {subCategories?.map(cat => (
+                {selectedCate && (
+                    <>
+                        <div className="dropdown-section  w-full">
+                            {subCategories.filter((c) => c?.categories?.includes(selectedCate?.toString()))?.map(cat => (
+                                <Link to={`/courses/${makeCateUrl()}`} onMouseEnter={() => setSelectedSubCate(cat.id)}
+                                      className="max-w-2xl w-full flex justify-between items-center ">
+                                    <h4>{cat.title}</h4>
+                                    <TfiAngleRight className="text-xs"/>
+                                </Link>
+                            ))}
 
-                            <div onClick={() => setSelelectedCat(cat.id)}
-                                 className="max-w-2xl w-full flex justify-between items-center ">
-                                <h4>{cat.title}</h4>
-                                <TfiAngleRight className="text-xs"/>
+                        </div>
+
+                        {selectedSubCate && (
+                            <div className="dropdown-section  w-full">
+                                {topics.filter((c) => c?.subCategories?.includes(selectedSubCate?.toString()))?.map(top => (
+                                    <Link key={top.id} to={`/topic/${top.slug}`}
+                                          className="flex justify-between items-center">
+                                        <h4>{top.title}</h4>
+                                    </Link>
+                                ))}
 
                             </div>
-                        ))}
-
-                    </div>
+                        )}
+                    </>
                 )}
 
 
-                {selectedCate == 1 && (
-                    <div className="dropdown-section  w-full">
-                        {topics?.map(top => (
-                            <Link onClick={() => setOpen(false)} to={`/topic/${top.slug}`}
-                                  className="flex justify-between items-center">
-                                <h4>{top.title}</h4>
-                            </Link>
-                        ))}
-
-                    </div>
-                )}
             </div>
 
         </div>
