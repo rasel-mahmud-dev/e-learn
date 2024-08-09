@@ -6,6 +6,9 @@ import TopCourse from "../components/HomePage/TopCourse.tsx";
 import {useTopicDetail} from "../store/useTopicDetail.ts";
 import topics from "./AdminDashboard/Topics/Topics.tsx";
 import topicService from "../store/services/topicsService.ts";
+import {FaUsers} from "react-icons/fa";
+import {FiUsers} from "react-icons/fi";
+import {HiUsers} from "react-icons/hi";
 
 interface CourseDetail {
     id: number;
@@ -80,11 +83,35 @@ function TopicSearch() {
     return (
         <div className="container mx-auto p-6">
             <div className="  mb-8">
-                <h1 className="text-4xl font-bold">{detail?.title} Courses</h1>
-                <p className="text-gray-600">JavaScript relates to <span className="font-bold">Development, IT & Software</span>
-                </p>
-                <p className="text-gray-600"><i className="fas fa-users"></i> {totalLearner.toLocaleString()} learners
-                </p>
+
+
+                {detail?.title
+                    ? (
+                        <>
+                            <h1 className="text-4xl font-bold">{detail?.title} Courses</h1>
+                            <p className="text-gray-600">JavaScript relates to <span className="font-bold">Development, IT & Software</span>
+                            </p>
+                        </>
+                    )
+                    : (
+                        <>
+                            <div className="skeleton rounded-none h-10 w-1/4"></div>
+                            <div className="skeleton rounded-none h-4 w-2/4 mt-2"></div>
+                        </>
+
+                    )
+                }
+
+
+                <div className="flex items-center text-gray-600 gap-x-2 mt-2">
+                    <HiUsers/>
+                    {totalLearner !== undefined ? (
+                        <p>{totalLearner.toLocaleString()} learners</p>
+                    ) : (
+                        <div className="skeleton rounded-none h-4 w-1/4  "></div>
+                    )}
+                </div>
+
             </div>
 
 
