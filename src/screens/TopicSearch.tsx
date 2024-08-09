@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {api} from "../apis";
 import AllCourses from "../components/HomePage/AllCourses.tsx";
@@ -39,7 +39,7 @@ function TopicSearch() {
     useEffect(() => {
         if (!topic) return;
         topicService.storeTopicPref(topic)
-        topicService.getPopularTopics().then(topics=>{
+        topicService.getPopularTopics().then(topics => {
             setPopularTopics(topics)
         })
         fetchTopicDetail(topic)
@@ -114,13 +114,32 @@ function TopicSearch() {
 
             <div className="py-6">
                 <h1 className="text-3xl font-bold">Popular topics</h1>
-               <div className=" flex flex-wrap   pt-4 space-x-2">
-                   {popularTopics?.map(tp=>(
-                       <div className="border border-gray-500 border-2 w-max px-4 py-1">
-                           {tp.title}
-                       </div>
-                   ))}
-               </div>
+                <div className=" flex flex-wrap   pt-4 space-x-2">
+
+                    {popularTopics.length === 0 &&
+                        <div className="flex flex-wrap gap-2">
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                            <div className="border-gray-500 border-2 rounded-none  px-4 py-1 w-32 h-10 skeleton"></div>
+                        </div>
+                    }
+
+                    {popularTopics?.map(tp => (
+                        <Link to={`/topic/${tp.slug}`} className="border-gray-500 border-2 w-max px-4 py-1">
+                            {tp.title}
+                        </Link>
+                    ))}
+                </div>
 
             </div>
 
@@ -131,6 +150,8 @@ function TopicSearch() {
 
             <div className=" ">
                 <TopCourse/>
+
+
             </div>
 
 

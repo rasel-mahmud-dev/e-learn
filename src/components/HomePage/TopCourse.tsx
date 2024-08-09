@@ -26,6 +26,21 @@ const TopCourse = () => {
                 rutrum inceptos ligula habitant letius pharetra. Aliquam si luctus sociosqu accumsan aptent porta
                 fermentum letius tellus id.
             </p>
+
+            {courses.length === 0 && (
+                <div className="grid grid-cols-4 gap-4">
+                    { Array.from({length: 6}).map(() => (
+                        <div className="card w-full flex-col gap-2">
+                            <div className="skeleton rounded-none h-40 w-full"></div>
+                            <div className="skeleton rounded-none h-4 w-full"></div>
+                            <div className="skeleton rounded-none h-4 w-full"></div>
+                            <div className="skeleton rounded-none  h-4 w-full"></div>
+                            <div className="skeleton rounded-none mb-8 h-4 w-2/3"></div>
+                        </div>
+                    ))}
+                </div>
+            )}
+
             <div className="grid grid-cols-4 gap-4">
                 {courses.map((course) => (
                     <Link to={`/course/${course.slug}`}>
