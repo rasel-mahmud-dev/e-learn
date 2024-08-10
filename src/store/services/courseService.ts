@@ -1,9 +1,15 @@
 import {api} from "../../apis";
 
 class CourseService {
-    async fetchTopCourses() {
+    async fetchTopCourses(args: { topics?: string[] }) {
         try {
-            const res = await api.get("/api/v1/instructor/courses");
+            let query = ``
+            if (args.topics) {
+                for (const topic of args.topics) {
+                    query += `topic=${encodeURIComponent(topic)}&`
+                }
+            }
+            const res = await api.get(`/api/v1/courses2?${query}`);
             return res?.data?.data || []
         } catch (ex) {
             return []

@@ -6,14 +6,14 @@ import courseService from "./services/courseService.ts";
 
 interface CategoryStateType {
     courses:  any[],
-    fetchTopCourses: () => void,
+    fetchTopCourses: (args: {topics?: string[]}) => void,
 
 }
 
 export const useTopCourses = create<CategoryStateType>((set) => ({
     courses: [],
-    fetchTopCourses: async function () {
-        const courses = await courseService.fetchTopCourses()
+    fetchTopCourses: async function (args) {
+        const courses = await courseService.fetchTopCourses(args)
         return set(state => {
             return {...state, courses}
         })

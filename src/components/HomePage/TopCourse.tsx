@@ -4,12 +4,14 @@ import {Link} from "react-router-dom";
 import Rating from "../Reviews/Rating.tsx";
 import Rate from "../Reviews/Rate.tsx";
 
-const TopCourse = () => {
+const TopCourse = ({topic}) => {
 
     const {courses, fetchTopCourses} = useTopCourses()
 
     useEffect(() => {
-        fetchTopCourses()
+        fetchTopCourses({
+            topics: [topic]
+        })
     }, []);
 
     return (

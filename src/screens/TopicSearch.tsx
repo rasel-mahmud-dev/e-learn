@@ -9,6 +9,7 @@ import topicService from "../store/services/topicsService.ts";
 import {FaUsers} from "react-icons/fa";
 import {FiUsers} from "react-icons/fi";
 import {HiUsers} from "react-icons/hi";
+import Slider from "../components/Slider/Slider.tsx";
 
 interface CourseDetail {
     id: number;
@@ -102,6 +103,8 @@ function TopicSearch() {
                     )
                 }
 
+                <Slider />
+
 
                 <div className="flex items-center text-gray-600 gap-x-2 mt-2">
                     <HiUsers/>
@@ -161,6 +164,8 @@ function TopicSearch() {
                         </div>
                     }
 
+
+
                     {popularTopics?.map(tp => (
                         <Link to={`/topic/${tp.slug}`} className="border-gray-500 border-2 w-max px-4 py-1">
                             {tp.title}
@@ -176,7 +181,7 @@ function TopicSearch() {
             </div>
 
             <div className=" ">
-                <TopCourse/>
+                <TopCourse topic={topic} />
 
 
             </div>
